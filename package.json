@@ -1,0 +1,25 @@
+{
+  "name": "activity-log",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.8.4"
+  },
+  "dependencies": {
+    "bootstrap-css-only": "^3.3.7",
+    "chroma-js": "^1.2.1",
+    "d3": "^4.4.1",
+    "d3-format": "^1.0.2",
+    "moment": "^2.17.1",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "underscore": "^1.8.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "homepage": "http://tany.kim/2016-swimming"
+}
