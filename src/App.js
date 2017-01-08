@@ -11,7 +11,7 @@ import { capitalize } from './processors/formats';
 class App extends Component {
   constructor(props) {
     super(props);
-    const dataId = 'tanyofish-swimming-2016';
+    const dataId = this.props.params.dataId || 'tanyofish-swimming-2016';
     const setting = require(`./settings/${dataId}.json`);
     const data = require(`./data/${dataId}.json`);
     const year = setting.year;

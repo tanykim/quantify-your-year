@@ -86,7 +86,12 @@ function humanizeDuration(year, unit, id, count) {
 }
 
 function pronoun(gender, isHead) {
-  const pn = gender === 'female'? `she` : `he`;
+  let pn = 'xe';
+  if (gender === 'female') {
+    pn = 'she';
+  } else if (gender === 'male') {
+    pn = 'he';
+  }
   return isHead ? capitalize(pn) : pn;
 }
 export { capitalize, pluralize, locale, prefix, humanizeUnitId, humanizeDuration, pronoun };

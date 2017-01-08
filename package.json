@@ -22,5 +22,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "http://tany.kim/2016-swimming"
+  "homepage": "http://tany.kim/activity-log"
 }
