@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Data from './data/data.json';
 import Summary from './components/Summary';
 import Visualization from './components/Visualization';
 import Max from './components/Max';
@@ -12,16 +11,20 @@ import { capitalize } from './processors/formats';
 class App extends Component {
   constructor(props) {
     super(props);
-    const year = this.props.year;
-    const calendar = getCalendar(Data, year)
+    const dataId = 'tanyofish-swimming-2016';
+    const setting = require(`./settings/${dataId}.json`);
+    const data = require(`./data/${dataId}.json`);
+    const year = setting.year;
     this.state = {
+      setting: setting,
+      data: data,
       unit: 'day',
-      sum: getSum(Data),
-      averages: getAverages(Data, year),
+      sum: getSum(data),
+      averages: getAverages(data, year),
       dims: getDimensions(year),
-      calendar,
-      stats: this.props.considerFrequency ? getStatsByUnit(Data, year) : null,
-      byDay: getDataByDay(Data)
+      calendar: getCalendar(data, year),
+      stats: setting.considerFrequency ? getStatsByUnit(data, year) : null,
+      byDay: getDataByDay(data)
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -31,17 +34,18 @@ class App extends Component {
   }
 
   render() {
+    const s = this.state.setting;
     return (
       <div>
         <div className="row">
           <div className="col-xs-12">
-            <h4>{capitalize(this.props.author)}'s</h4>
-            <h1>{capitalize(this.props.topic)} in {this.props.year}</h1>
+            <h4>{capitalize(s.author)}'s</h4>
+            <h1>{capitalize(s.topic)} in {s.year}</h1>
           </div>
         </div>
         <div className="row">
           <Summary
-            {...this.props}
+            {...s}
             sum={this.state.sum}
             averages={this.state.averages}/>
         </div>
@@ -52,39 +56,26 @@ class App extends Component {
             <input type="radio" name="unit" checked={this.state.unit === 'month'} onChange={this.onChange} value="month" /> Month
           </div>
           <Visualization
-            data={this.props.data}
-            year={this.props.year}
+            data={this.state.data}
+            year={s.year}
             unit={this.state.unit}
             dims={this.state.dims}
             calendar={this.state.calendar} />
           <Max
-            {...this.props}
+            {...s}
             unit={this.state.unit}
             calendar={this.state.calendar}/>
-          {this.props.considerFrequency && <Stats unit={this.state.unit} stats={this.state.stats} />}
+          {s.considerFrequency && <Stats unit={this.state.unit} stats={this.state.stats} />}
         </div>
         <ByDay
-          showRadio={this.props.considerFrequency}
+          showRadio={s.considerFrequency}
           data={this.state.byDay}
-          metric={this.props.metric}
-          abbr={this.props.abbr}
+          metric={s.metric}
+          abbr={s.abbr}
           dims={this.state.dims} />
       </div>
     );
   }
-}
-
-App.defaultProps = {
-  year: 2016,
-  author: 'tanyofish',
-  gender: 'female',
-  topic: 'swimming',
-  pastVerb: 'swam',
-  type: 'distance',
-  metric: 'yard',
-  abbr: 'yd',
-  considerFrequency: true,
-  data: Data
 }
 
 export default App;

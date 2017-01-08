@@ -2,8 +2,9 @@
 Calendar-based nisualization of one kind of activity
 
 ## URL and Dataset
-The URL would be ```your_project_address/#[USER_NAME]-#[ACTIVITY_TYPE]-#[YEAR]```.
-Name your dataset following the convention above (e.g., tanyoung-swimming-2016.json).
+The URL would be ```your_project_address/#/[AUTHOR]-#[ACTIVITY_TOPIC]-#[YEAR]```.
+Name your data and setting file following the convention above (e.g., tanyoung-swimming-2016.json).
+Save the two files in ```src/data``` and ```src/settings``` respectively.
 
 ## Dataset Format
 Have the dataset ready in the format of ```src/data.json```.

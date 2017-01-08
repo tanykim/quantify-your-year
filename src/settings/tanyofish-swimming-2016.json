@@ -1,0 +1,11 @@
+{
+  "year": 2016,
+  "author": "tanyofish",
+  "gender": "female",
+  "topic": "swimming",
+  "pastVerb": "swam",
+  "type": "distance",
+  "metric": "yard",
+  "abbr": "yd",
+  "considerFrequency": true
+}

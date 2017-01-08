@@ -27,10 +27,10 @@ class Stats extends Component {
         <span className={consec.inactive.count > 0 ? 'show-inline' : 'hide'}>
           , happened {consec.active.list.length} time
           {consec.active.list.length > 1 ? 's: ' : ': '}
-          {consecActiveList}
+          {consecActiveList}.
           <br/>
           Longest break was {pluralize(consec.inactive.count, unit)}:
-          {consecInactiveList}
+          {consecInactiveList}.
         </span>
         <span className={consec.inactive.count === 0 ? 'show-inline' : 'hide'}>.</span>
       </div>
