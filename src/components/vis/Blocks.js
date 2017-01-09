@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import _ from 'underscore';
-import { getAreaPath } from './../../processors/dimensions';
+import { getPoints, getAreaPath } from './../../processors/dimensions';
 import { getFillColor } from './../../processors/colors';
 
 class Block extends Component {
@@ -90,16 +90,19 @@ class Blocks extends Component {
     const monthData = _.map(this.props.calendar.byUnit.month, function (v, k) {
       return [k, v];
     });
-    const monthItems = monthData.map((item) =>
-      (<Path
-        d={getAreaPath(this.props.rectW, this.props.h, this.props.margin, this.props.year, item[0])}
-        x={+item[0] * rectW * 4}
+    const monthItems = monthData.map((item) => {
+      const path = getAreaPath(this.props.rectW, this.props.h, this.props.margin, this.props.year, item[0]);
+      const points = getPoints(this.props.rectW, this.props.h, this.props.margin, this.props.year, item[0]);
+      return  (<Path
+        d={path}
+        x={points.x + points.diff}
         y="0"
         key={+item[0]}
         id={+item[0]}
         value={item[1]}
         rectHovered={this.props.rectHovered}
-      />)
+      />);
+      }
     );
     const m = this.props.margin;
     return (

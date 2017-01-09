@@ -10,6 +10,7 @@ class Visualization extends Component {
   constructor(props) {
     super(props);
     this.rectHovered = this.rectHovered.bind(this);
+    this.state = {isHovered: false};
   }
 
   rectHovered(isHovered, x, y, id, val) {
@@ -29,12 +30,9 @@ class Visualization extends Component {
           <VerticalLines {...dims} unit={this.props.unit} />
           <MonthPaths {...dims} />
           <DayTexts left={dims.margin.left} top={dims.margin.legend + dims.margin.top} h={dims.rectW} />
-          <ToolTip
-            {...dims}
-            {...this.state}
-            year={this.props.year}
-            unit={this.props.unit}
-            abbr={this.props.abbr}/>
+          <g>
+            {this.state.isHovered && <ToolTip {...this.props} {...this.state} {...dims}/>}
+          </g>
         </svg>
       </div>
     );

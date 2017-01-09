@@ -170,6 +170,10 @@ ii {
   border-top: 1px solid #e9ecef;
   color: #868e96;
 }
+.block:hover {
+  stroke: #212529;
+  stroke-width: 1px;
+}
 .lines {
   stroke: #ced4da;
 }
@@ -200,4 +204,12 @@ ii {
 }
 .tick text {
   font-size: 12px;
+}
+.bg {
+  fill: #212529;
+}
+.tp {
+  font-weight: normal;
+  font-size: 14px;
+  fill: #FFF;
 }

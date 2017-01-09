@@ -48,7 +48,6 @@ function getDurationAcrossMonth(sd, ed, isDay) {
 }
 
 function humanizeUnitId(year, unit, id) {
-  console.log(year, unit, id);
   const d = _.isNull(year) ? moment(id, 'M/D/YYYY') : getMomentDay(year, unit, id);
   if (unit === 'day') {
     return d.format('ddd MMM D');
