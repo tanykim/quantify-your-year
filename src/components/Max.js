@@ -14,7 +14,7 @@ class Max extends Component {
       <div className="col-xs-12 max">
         {capitalize(this.props.author)}'s record {this.props.type} in a {unit} is
         {` `}<i>{pluralize(max.val, this.props.metric)}</i>:
-        {` `}achived {conj[unit]} <i>{maxActiveList}</i>.
+        {` `}achieved {conj[unit]} <i>{maxActiveList}</i>.
       </div>
     );
   }

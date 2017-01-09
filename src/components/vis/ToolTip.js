@@ -46,7 +46,7 @@ class ToolTip extends Component {
           id="tt-label"
         >
           <tspan x={this.state.textX} dy="14">{humanizeUnitId(year, this.props.unit, this.props.id)}</tspan>
-          <tspan x={this.state.textX} dy="20">{locale(this.props.val)} {this.props.abbr}</tspan>
+          <tspan x={this.state.textX} dy="20">{locale(this.props.val)}{this.props.abbr}</tspan>
         </text>
       </g>
     );
