@@ -8,7 +8,6 @@ import ByDay from './components/ByDay';
 import { getSum, getAverages, getCalendar, getStatsByUnit, getDataByDay } from './processors/analysis';
 import { getDimensions } from './processors/dimensions';
 import { capitalize } from './processors/formats';
-// import { setColorPallette } from './processors/colors';
 
 class App extends Component {
   constructor(props) {
@@ -30,6 +29,19 @@ class App extends Component {
       byDay: getDataByDay(data)
     };
     this.onChange = this.onChange.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll(event) {
+    if (event.srcElement.body.scrollTop > 180) {
+      this.setState({isScrolled: true});
+    } else {
+      this.setState({isScrolled: false});
+    }
   }
 
   onChange(e) {
@@ -40,11 +52,9 @@ class App extends Component {
     const s = this.state.setting;
     return (
       <div className={s.color}>
-        <div className="row header">
-          <div className="col-xs-12">
+        <div className={this.state.isScrolled ? 'header-fixed' : 'header'}>
             <div className="author">{capitalize(s.author)}'s</div>
             <div className="topic">{capitalize(s.topic)} in {s.year}</div>
-          </div>
         </div>
         <div className="row">
           <Summary

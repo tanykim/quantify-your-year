@@ -12,7 +12,6 @@ class ByDay extends Component {
   }
 
   onChange(e) {
-    console.log(e.target.value);
     this.setState({selection: e.target.value});
   }
 
