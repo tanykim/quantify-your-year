@@ -52,7 +52,7 @@ function humanizeUnitId(year, unit, id) {
   if (unit === 'day') {
     return d.format('ddd MMM D');
   } else if (unit === 'week') {
-    const sd = d.startOf('week');
+    const sd = d.startOf(id === 0 ? 'year' : 'week');
     const ed = sd.clone().add(6, 'days');
     return getDurationAcrossMonth(sd, ed);
   } else {
@@ -61,11 +61,14 @@ function humanizeUnitId(year, unit, id) {
 }
 
 function humanizeDuration(year, unit, id, count) {
+  if (count === 1) {
+    return humanizeUnitId(year, unit, id);
+  }
   let sd;
   if (unit === 'day') {
     sd = getMomentDay(year, unit, id);
   } else if (unit === 'week') {
-    sd = getMomentDay(year, unit, id).startOf('week');
+    sd = getMomentDay(year, unit, id).startOf(id === 0 ? 'year' : 'week');
   } else {
     sd = moment(unit + 1, 'M');
   }

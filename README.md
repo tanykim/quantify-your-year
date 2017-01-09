@@ -40,11 +40,12 @@ The data should be an array of dates with valid numbered data value. For example
 ```
 If you log your data on Google Spreadsheet, try this convenient [converter](https://www.npmjs.com/package/google-spreadsheet-to-json).
 
-
 ## Compile CSS
 ```
 lessc src/index.less src/index.css
 ```
+## Development & Build
+```npm start``` for local development and ```npm run build``` for production-ready files.
 
 ## Made with React
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
