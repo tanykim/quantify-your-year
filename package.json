@@ -23,5 +23,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "http://tany.kim/activity-log"
+  "homepage": "http://tany.kim/quantify-your-year"
 }
