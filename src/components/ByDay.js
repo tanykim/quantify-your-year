@@ -18,9 +18,11 @@ class ByDay extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="row unit-selection">
+        <div className="col-xs-12 title">
+          See your {this.props.topic} by day
+        </div>
         <div className="col-xs-12">
-          <div>By Day</div>
           <div className={this.props.showRadio ? 'show' : 'hide'}>
             <input type="radio" name="bar" checked={this.state.selection === 'value'} onChange={this.onChange} value="value" />
               Total {capitalize(this.props.metric)} ({this.props.abbr})

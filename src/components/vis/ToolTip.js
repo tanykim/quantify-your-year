@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { humanizeUnitId, locale } from './../../processors/formats';
 
 class ToolTip extends Component {
   render() {
     const m = this.props.margin;
+    const year = this.props.unit === 'day' ? null : this.props.year;
     return (
       <g transform={`translate(${m.left}, ${m.legend + m.top})`}>
         <text
@@ -11,7 +13,9 @@ class ToolTip extends Component {
           y={this.props.y}
           fill="black"
         >
-          {this.props.label} - {this.props.val}
+          {humanizeUnitId(year, this.props.unit, this.props.id)}
+          -
+          {locale(this.props.val)} {this.props.abbr}
         </text>
       </g>
     );

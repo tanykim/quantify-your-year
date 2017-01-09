@@ -1,0 +1,34 @@
+.lines {
+  stroke: #ced4da;
+}
+.month-path {
+  stroke: @main;
+  stroke-width: 1.5px;
+  shape-rendering: crispEdges;
+  fill: none;
+}
+.month-text {
+  font-size: 14px;
+  alignment-baseline: hanging;
+}
+.day-text {
+  font-size: 14px;
+  alignment-baseline: central;
+  text-anchor: end;
+}
+.label-text {
+  font-size: 14px;
+  alignment-baseline: central;
+}
+
+.axis path {
+  stroke: none;
+}
+.tick {
+  line {
+    stroke: fade(@main, 20%);
+  }
+  text {
+    font-size: 12px;
+  }
+}

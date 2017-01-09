@@ -1,13 +1,25 @@
+// import less from 'less';
 import chroma from 'chroma-js';
 
-var brewer = chroma.bezier(['#ffec99', '#1862AB']).scale();
+const colors = {
+  blue: ['#F0FFFF', '#87CEEB', 'SlateBlue', '#031968'],
+  red: ['lightyellow', 'orange', 'deeppink', 'darkred'],
+  green: ['lightyellow', 'lightgreen', 'darkgreen'],
+  teal: ['lightyellow', 'turquoise', 'Teal'],
+  purple: ['lightyellow', 'coral', 'mediumvioletred', 'purple']
+}
+
+var brewer;
+ // = chroma.bezier(['#ffec99', '#1862AB']).scale();
 var steps;
 var distance;
+var maxColor;
 
-function getColorRange(s, d) {
+function getColorRange(s, d, c) {
   steps = s;
   distance = d;
-  brewer.domain(s)
+  brewer = chroma.bezier(colors[c]).scale().domain(s);
+  maxColor = colors[c][colors[c].length - 1];
 }
 
 function getFillColor(val) {
@@ -21,6 +33,7 @@ function getFillColor(val) {
   return brewer(rounded);
 }
 
-let maxColor = '#1862AB';
-
-export { getColorRange, getFillColor, maxColor };
+function getMaxColor() {
+  return maxColor;
+}
+export { getColorRange, getFillColor, getMaxColor };

@@ -1,0 +1,38 @@
+@main: #212529;
+
+@blue: #F0FFFF, #87CEEB, SlateBlue, #031968;
+@red: lightyellow, orange, deeppink, darkred;
+@green: lightyellow, lightgreen, darkgreen;
+@teal: lightyellow, turquoise, Teal;
+@purple: lightyellow, coral, mediumvioletred, purple;
+
+.blue {
+  .author { color: extract(@blue, 4); }
+  i { background-color: extract(@blue, 4); }
+  ii { background-color: extract(@blue, 2); }
+  a { color: extract(@blue, 4); }
+}
+.red {
+  .author { color: extract(@red, 4); }
+  i { background-color: extract(@red, 4); }
+  ii { background-color: extract(@red, 3); }
+  a { color: extract(@red, 4); }
+}
+.green {
+  .author { color: extract(@green, 3); }
+  i { background-color: extract(@green, 3); }
+  ii { background-color: extract(@green, 2); }
+  a { color: extract(@green, 3); }
+}
+.teal {
+  .author { color: extract(@teal, 3); }
+  i { background-color: extract(@teal, 3); }
+  ii { background-color: extract(@teal, 2); }
+  a { color: extract(@teal, 3); }
+}
+.purple {
+  .author { color: extract(@purple, 4); }
+  i { background-color: extract(@purple, 4); }
+  ii { background-color: extract(@purple, 2); }
+  a { color: extract(@purple, 4); }
+}

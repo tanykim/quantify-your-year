@@ -1,11 +1,67 @@
+.blue .author {
+  color: #031968;
+}
+.blue i {
+  background-color: #031968;
+}
+.blue ii {
+  background-color: #87CEEB;
+}
+.blue a {
+  color: #031968;
+}
+.red .author {
+  color: darkred;
+}
+.red i {
+  background-color: darkred;
+}
+.red ii {
+  background-color: deeppink;
+}
+.red a {
+  color: darkred;
+}
+.green .author {
+  color: darkgreen;
+}
+.green i {
+  background-color: darkgreen;
+}
+.green ii {
+  background-color: lightgreen;
+}
+.green a {
+  color: darkgreen;
+}
+.teal .author {
+  color: Teal;
+}
+.teal i {
+  background-color: Teal;
+}
+.teal ii {
+  background-color: turquoise;
+}
+.teal a {
+  color: Teal;
+}
+.purple .author {
+  color: purple;
+}
+.purple i {
+  background-color: purple;
+}
+.purple ii {
+  background-color: coral;
+}
+.purple a {
+  color: purple;
+}
 body {
   margin: 0;
   padding: 0;
-}
-.legend-label {
-  font-size: 12px;
-  text-anchor: middle;
-  alignment-baseline: hanging;
+  color: #212529;
 }
 .hide {
   display: hide;
@@ -16,16 +72,132 @@ body {
 .show-inline {
   display: inline;
 }
-.month-text {
+.header {
+  padding-top: 24px;
+  padding-bottom: 36px;
+}
+.header .author {
+  font-size: 18px;
+}
+.header .topic {
+  font-size: 42px;
+  font-weight: bold;
+  line-height: 36px;
+}
+.summary,
+.max,
+.stats,
+.byDay {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 180%;
+}
+.summary {
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+}
+.max,
+.stats {
+  border-bottom: 1px solid #e9ecef;
+}
+.summary,
+.stats {
+  background-color: #f8f9fa;
+}
+.unit-selection {
+  padding-top: 24px;
+  padding-bottom: 12px;
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: -12px;
+}
+.unit-selection .title {
+  font-size: 24px;
+  padding-bottom: 12px;
+}
+.unit-selection input {
+  vertical-align: middle;
+  margin-top: -8px;
+  margin-right: 8px;
+  margin-left: 16px;
+}
+.unit-selection input:first-child {
+  margin-left: 0;
+}
+.legend {
+  line-height: 90%;
+  text-align: right;
+}
+.legend .block {
+  font-size: 1px;
+  display: inline-block;
+}
+.legend .label {
   font-size: 12px;
+  text-align: center;
+  color: #212529;
+  font-weight: normal;
+  display: inline-block;
+}
+.radios {
+  text-align: right;
+}
+.highlight {
+  font-style: normal;
+  font-weight: normal;
+  padding: 0 8px;
+}
+i {
+  font-style: normal;
+  font-weight: normal;
+  padding: 0 8px;
+  color: #FFF;
+}
+i l {
+  font-weight: 200;
+}
+ii {
+  font-style: normal;
+  font-weight: normal;
+  padding: 0 8px;
+}
+.footer {
+  margin-top: 36px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  border-top: 1px solid #e9ecef;
+  color: #868e96;
+}
+.lines {
+  stroke: #ced4da;
+}
+.month-path {
+  stroke: #212529;
+  stroke-width: 1.5px;
+  shape-rendering: crispEdges;
+  fill: none;
+}
+.month-text {
+  font-size: 14px;
   alignment-baseline: hanging;
 }
 .day-text {
-  font-size: 12px;
+  font-size: 14px;
   alignment-baseline: central;
   text-anchor: end;
 }
 .label-text {
-  font-size: 12px;
+  font-size: 14px;
   alignment-baseline: central;
+}
+.axis path {
+  stroke: none;
+}
+.tick line {
+  stroke: rgba(33, 37, 41, 0.2);
+}
+.tick text {
+  font-size: 12px;
 }

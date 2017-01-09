@@ -8,30 +8,28 @@ class Legend extends Component {
     const steps = this.props.range[this.props.unit].steps;
     const distance = this.props.range[this.props.unit].distance;
     const rectW = this.props.rectW * 2;
-    const rectH = this.props.rectW;
+    const rectH = this.props.rectW * 1.2;
 
-    getColorRange(steps, distance);
+    getColorRange(steps, distance, this.props.color);
 
-    const listItems = _.range(steps.length - 1).map((i) =>
-      (<rect
-        x={i * rectW}
-        y="0"
-        width={rectW}
-        height={rectH}
+    const blocks = _.range(steps.length - 1).map((i) =>
+      (<div className="block"
         key={i}
-        fill={getFillColor(steps[i])}
-      />
-      )
+        style={{backgroundColor: getFillColor(steps[i]), width: rectW, height: rectH}}
+      />)
     );
 
     const labels = steps.map((step, i) =>
-      <text x={i * rectW} y={rectH} key={i} className="legend-label">{prefix(step)}</text>
+      (<div className="label" key={i} style={{width: rectW}}>
+        {prefix(step)}
+      </div>)
     );
 
     return (
-      <g transform={`translate(${this.props.margin.left}, 0)`}>
-        {listItems} {labels}
-      </g>
+      <div className="legend">
+        <div style={{paddingRight: rectW / 2}}>{blocks}</div>
+        <div>{labels}</div>
+      </div>
     );
   }
 }

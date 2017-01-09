@@ -1,4 +1,5 @@
 import moment from 'moment';
+import _ from 'underscore';
 
 function getDimensions(year) {
   const startDate = moment(year, 'YYYY');
@@ -8,15 +9,17 @@ function getDimensions(year) {
   //bootstrap max width is 1140
   const containerW = Math.min(1140, document.getElementById('root').clientWidth);
 
-  const margin = {
-    legend: 60,
+  let margin = {
+    legend: 20,
     top: 40,
     left: 60,
-    right: 1,
-    bottom: 20
+    bottom: 8
   };
 
-  const rectW = Math.floor((containerW - margin.left - margin.right) / noOfWeeks);
+  const rectW = Math.max(Math.floor((containerW - margin.left) / noOfWeeks), 16);
+  //calibrate margin-right to aling legend and calendar-graph
+  margin.right = rectW;
+  margin.left = Math.max(40, containerW - rectW * noOfWeeks - margin.right);
 
   //vis dimensions
   return {
@@ -32,8 +35,7 @@ function getDimensions(year) {
 }
 
 function getPoints(rectW, h, margin, year, month, sd, sw) {
-
-  const startDay = sd || moment([year, month]).day();
+  const startDay = _.isUndefined(sd) ? moment([year, month]).day() : sd;
   const startWeek = sw || moment([year, month]).week() - 1;
 
   const x = startWeek * rectW;
@@ -57,7 +59,8 @@ function getAreaPath(rectW, h, margin, year, month) {
   if (+month < 11) {
     np = getPoints(rectW, h, margin, year, +month + 1);
   } else {
-    np = getPoints(rectW, h, margin, year, +month + 1, sp.startDay + 31, sp.startWeek + 5);
+    //December has 31 days, 31 % 7 = 3
+    np = getPoints(rectW, h, margin, year, +month + 1, 7 % (sp.startDay + 3), sp.startWeek + 5);
   }
   return `M ${sp.x}, ${h} V ${sp.y} h ${sp.diff} V 0 H ${np.x} h ${np.diff} V ${h} Z`;
 }

@@ -1,5 +1,6 @@
 import * as d3 from 'd3-format';
 import moment from 'moment';
+import _ from 'underscore';
 
 //abc -> Abc
 function capitalize(str) {
@@ -47,7 +48,8 @@ function getDurationAcrossMonth(sd, ed, isDay) {
 }
 
 function humanizeUnitId(year, unit, id) {
-  const d = getMomentDay(year, unit, id);
+  console.log(year, unit, id);
+  const d = _.isNull(year) ? moment(id, 'M/D/YYYY') : getMomentDay(year, unit, id);
   if (unit === 'day') {
     return d.format('ddd MMM D');
   } else if (unit === 'week') {
@@ -94,4 +96,5 @@ function pronoun(gender, isHead) {
   }
   return isHead ? capitalize(pn) : pn;
 }
+
 export { capitalize, pluralize, locale, prefix, humanizeUnitId, humanizeDuration, pronoun };

@@ -177,7 +177,10 @@ function getDataByDay(data) {
     return moment(d.date, 'M/D/YYYY').day();
   });
   return _.map(_.range(7), function (day) {
-    return {freq: byDayObj[day].length, value: getSum(byDayObj[day])};
+    return {
+      freq: byDayObj[day] ? byDayObj[day].length : 0,
+      value: byDayObj[day] ? getSum(byDayObj[day]) : 0
+    };
   });
 }
 

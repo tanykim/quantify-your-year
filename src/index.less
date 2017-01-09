@@ -1,14 +1,9 @@
+@import 'less/colors';
+
 body {
   margin: 0;
   padding: 0;
-}
-.unit-selection {
-}
-
-.legend-label {
-  font-size: 12px;
-  text-anchor: middle;
-  alignment-baseline: hanging;
+  color: @main;
 }
 
 .hide {
@@ -21,16 +16,95 @@ body {
   display: inline;
 }
 
-.month-text {
-  font-size: 12px;
-  alignment-baseline: hanging;
+.header {
+  padding-top: 24px;
+  padding-bottom: 36px;
+  .author {
+    font-size: 18px;
+  }
+  .topic {
+    font-size: 42px;
+    font-weight: bold;
+    line-height: 36px;
+  }
 }
-.day-text {
-  font-size: 12px;
-  alignment-baseline: central;
-  text-anchor: end;
+
+.summary, .max, .stats, .byDay {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 180%;
 }
-.label-text {
-  font-size: 12px;
-  alignment-baseline: central;
+.summary, {
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
 }
+.max, .stats {
+  border-bottom: 1px solid #e9ecef;
+}
+.summary, .stats {
+  background-color: #f8f9fa;
+}
+.unit-selection {
+  padding-top: 24px;
+  padding-bottom: 12px;
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: -12px;
+  .title {
+    font-size: 24px;
+    padding-bottom: 12px;
+  }
+  input {
+    vertical-align: middle;
+    margin-top: -8px;
+    margin-right: 8px;
+    margin-left: 16px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+.legend {
+  line-height: 90%;
+  text-align: right;
+  .block {
+    font-size: 1px;
+    display: inline-block;
+  }
+  .label {
+    font-size: 12px;
+    text-align: center;
+    color: @main;
+    font-weight: normal;
+    display: inline-block;
+  }
+}
+.radios {
+  text-align: right;
+}
+.highlight {
+  font-style: normal;
+  font-weight: normal;
+  padding: 0 8px;
+}
+i {
+  .highlight();
+  color: #FFF;
+  l {
+    font-weight: 200;
+  }
+}
+ii {
+  .highlight();
+}
+.footer {
+  margin-top: 36px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  border-top: 1px solid #e9ecef;
+  color: #868e96;
+}
+
+@import 'less/Visualization';

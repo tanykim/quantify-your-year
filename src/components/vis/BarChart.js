@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'underscore';
 import DayTexts from './DayTexts';
-import { maxColor } from './../../processors/colors';
+import { getMaxColor } from './../../processors/colors';
 import * as d3 from 'd3';
 
 class Bars extends Component {
@@ -17,14 +17,14 @@ class Bars extends Component {
         y={i * dim.barH + dim.barH / 8}
         width={xScale(day[sel])}
         height={dim.barH / 8 * 6}
-        fill={maxColor}
+        fill={getMaxColor()}
         key={i}
         />
     ));
 
     const labelList = data.map((day, i) => (
       <text
-        x={xScale(day[sel])}
+        x={xScale(day[sel]) + 9}
         y={i * dim.barH + dim.barH / 2}
         key={i}
         className="label-text">
@@ -53,14 +53,18 @@ class Axis extends Component {
       .call(d3
         .axisBottom(this.props.scale)
         .tickFormat(d3.format('.0s'))
-        // .tickSize(-this.props.dim.h)
+        .tickSize(-this.props.dim.h)
+        .tickPadding(9)
       );
   }
 
   render() {
     const dim = this.props.dim;
     return (
-      <g transform={`translate(${dim.margin.left}, ${dim.margin.top + dim.h})`} id="axis"></g>
+      <g
+        transform={`translate(${dim.margin.left}, ${dim.margin.top + dim.h})`}
+        id="axis"
+        className="axis" />
     );
   }
 }
@@ -70,10 +74,10 @@ class BarChart extends Component {
     super(props);
     const dims = this.props.dims;
     this.state = {
-      w: dims.w / 2,
+      w: Math.max(dims.w / 2, 800),
       h: dims.h * 2,
       margin: {
-        top: 0,
+        top: 20,
         right: 100,
         left: dims.margin.left,
         bottom: 40

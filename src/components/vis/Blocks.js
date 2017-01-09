@@ -11,7 +11,7 @@ class Block extends Component {
     this.onMouseOut = this.onMouseOut.bind(this);
   }
   onMouseOver() {
-    this.props.rectHovered(true, this.props.x, this.props.y, this.props.date, this.props.value);
+    this.props.rectHovered(true, this.props.x, this.props.y, this.props.id, this.props.value);
   }
   onMouseOut() {
     this.props.rectHovered(false);
@@ -67,7 +67,7 @@ class Blocks extends Component {
         width={rectW}
         height={rectW}
         key={item.date}
-        date={item.date}
+        id={item.date}
         value={item.value}
         rectHovered={this.props.rectHovered}
       />)
@@ -82,7 +82,7 @@ class Blocks extends Component {
         width={rectW}
         y2={rectW * (+item[0] === this.props.calendar.total.week -1 ? moment(this.props.year + 1, 'YYYY').add(-1, 'days').day() + 1 : 7)}
         key={+item[0]}
-        date={+item[0]}
+        id={+item[0]}
         value={item[1]}
         rectHovered={this.props.rectHovered}
       />)
@@ -96,7 +96,7 @@ class Blocks extends Component {
         x={+item[0] * rectW * 4}
         y="0"
         key={+item[0]}
-        date={+item[0]}
+        id={+item[0]}
         value={item[1]}
         rectHovered={this.props.rectHovered}
       />)

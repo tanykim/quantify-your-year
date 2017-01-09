@@ -7,7 +7,7 @@ class DayTexts extends Component {
     const text = _.range(7).map((day) =>
       (<text
         key={day}
-        x="0"
+        x="-9"
         y={this.props.h * (day + 0.5)}
         className="day-text"
       >

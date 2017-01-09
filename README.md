@@ -19,6 +19,7 @@ The setting file contains following information. For example,
   "metric": "yard", //unit of the type, use singular form. e.g., minute, meter, step,
   "abbr": "yd", //same as metric if no abbreviation is common. e.g., m, yd, km,
   "considerFrequency": true //false if most of the days have data so the number of days with valid data does not give insights.
+  "color": "blue" //choose the highlight color from blue, red
 }
 ```
 If the frequency matters (e.g., one may not swim every day), this project provides further analysis including consecutive days/week/month.

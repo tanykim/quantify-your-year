@@ -4,14 +4,14 @@ import { pronoun, capitalize, pluralize } from './../processors/formats';
 class Summary extends Component {
   render() {
     return (
-      <div className="col-xs-12">
+      <div className="col-xs-12 summary">
         {capitalize(this.props.author)} {this.props.pastVerb}
         {this.props.type === 'duration' ? ` for ` : ` total `}
-        {pluralize(this.props.sum, this.props.metric)}. <br />
+        <i>{pluralize(this.props.sum, this.props.metric)}</i>. <br />
         {pronoun(this.props.gender, true)} {this.props.pastVerb} in average
-        {` ${this.props.averages.day}${this.props.abbr} per day,`}
-        {` ${this.props.averages.week}${this.props.abbr} per week, and`}
-        {` ${this.props.averages.month}${this.props.abbr} per month`}
+        {` `}<i>{this.props.averages.day} <l>{this.props.abbr}/day</l></i>,
+        {` `}<i>{this.props.averages.week} <l>{this.props.abbr}/week</l></i>, and
+        {` `}<i>{this.props.averages.month} <l>{this.props.abbr}/month</l></i>
         {this.props.considerFrequency ? ` on those active days.` : `.` }
       </div>
     );

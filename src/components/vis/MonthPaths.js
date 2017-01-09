@@ -7,11 +7,9 @@ class MonthPaths extends Component {
   render() {
     const props = this.props;
     const path = _.range(12).map((month) =>
-      (<path
+      (<path className="month-path"
         d={getPath(props, month)}
         key={month}
-        stroke="red"
-        fill="none"
       />)
     );
     const text = _.map(_.range(12), function (month) {
@@ -19,8 +17,8 @@ class MonthPaths extends Component {
       return (
         <text
           key={month}
-          x={p.x + p.diff}
-          y={p.eY}
+          x={p.x + p.diff + 6}
+          y={p.eY + 2}
           className="month-text"
         >
           {moment(month + 1, 'M').format('MMM')}
