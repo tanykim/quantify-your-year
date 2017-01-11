@@ -7,8 +7,9 @@ class Legend extends Component {
   render() {
     const steps = this.props.range[this.props.unit].steps;
     const distance = this.props.range[this.props.unit].distance;
-    const rectW = this.props.rectW * 2;
-    const rectH = this.props.rectW * 1.2;
+    const maxRectW = (this.props.containerW - this.props.marginRight * 2) / (steps.length - 1);
+    const rectW = Math.min(maxRectW, this.props.rectW * 2)
+    const rectH = this.props.rectW;
 
     getColorRange(steps, distance, this.props.color);
 
@@ -27,7 +28,7 @@ class Legend extends Component {
 
     return (
       <div className="legend">
-        <div style={{paddingRight: rectW / 2}}>{blocks}</div>
+        <div style={{padding: `0 ${this.props.marginRight}px`}}>{blocks}</div>
         <div>{labels}</div>
       </div>
     );

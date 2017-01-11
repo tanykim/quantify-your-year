@@ -67,8 +67,8 @@ function getTotalCount(year) {
 }
 
 function getValueRange(min, max) {
-  //get chroma range: brew colors upto 10
-  const minDiff = Math.floor((max - min) / 11).toString();
+  //get chroma range: brew colors upto 7 or 8
+  const minDiff = Math.floor((max - min) / 8).toString();
   //steps increase 1, 2, 5, 10, 20, 50, 100, 200, 5000, 1000 ...
   let step = 10;
   const firstDigit = parseInt(minDiff[0], 0);

@@ -5,6 +5,7 @@
 @green: lightyellow, lightgreen, darkgreen;
 @teal: lightyellow, turquoise, Teal;
 @purple: lightyellow, coral, mediumvioletred, purple;
+@brown: lightyellow, LightSalmon, darkOrange, Brown;
 
 .blue {
   .author { color: extract(@blue, 4); }
@@ -16,7 +17,7 @@
 .red {
   .author { color: extract(@red, 4); }
   i { background-color: extract(@red, 4); }
-  ii { background-color: extract(@red, 3); }
+  ii { background-color: extract(@red, 2); }
   a { color: extract(@red, 4); }
 }
 .green {
@@ -36,4 +37,10 @@
   i { background-color: extract(@purple, 4); }
   ii { background-color: extract(@purple, 2); }
   a { color: extract(@purple, 4); }
+}
+.brown {
+  .author { color: extract(@brown, 4); }
+  i { background-color: extract(@brown, 4); }
+  ii { background-color: extract(@brown, 3); }
+  a { color: extract(@brown, 4); }
 }

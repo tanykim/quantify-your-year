@@ -52,9 +52,10 @@ class Axis extends Component {
     d3.select('#axis')
       .call(d3
         .axisBottom(this.props.scale)
-        .tickFormat(d3.format('.0s'))
+        .tickFormat(d3.format('.1s'))
         .tickSize(-this.props.dim.h)
         .tickPadding(9)
+        .ticks(8)
       );
   }
 
@@ -73,16 +74,17 @@ class BarChart extends Component {
   constructor(props) {
     super(props);
     const dims = this.props.dims;
+    const margin = {
+      top: 20,
+      right: 80,
+      left: dims.margin.left,
+      bottom: 40
+    };
     this.state = {
-      w: Math.max(dims.w / 2, 800),
+      w: dims.containerW - margin.left - margin.right,
       h: dims.h * 2,
-      margin: {
-        top: 20,
-        right: 100,
-        left: dims.margin.left,
-        bottom: 40
-      },
-      barH: dims.h * 2 / 7
+      barH: dims.h * 2 / 7,
+      margin
     };
   }
 

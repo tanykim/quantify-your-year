@@ -8,14 +8,14 @@ class Stats extends Component {
     const stats = this.props.stats;
 
     const unitSentence = `${pronoun(this.props.gender, true)} ${this.props.pastVerb}
-      <i>${pluralize(stats.active[unit], unit, stats.total[unit])}</i> in ${this.props.year}  . `;
+      <i>${pluralize(stats.active[unit], unit, stats.total[unit])}</i> in ${this.props.year}. `;
 
     const consec = stats.consec[unit];
     const consecActiveList = consec.active.list.map((item, i) =>
-      <span key={i}><ii>{item}</ii>{i < consec.active.list.length - 1 && ', '}</span>
+      <span key={i}><ii><l>{item}</l></ii>{i < consec.active.list.length - 1 && ', '}</span>
     );
     const consecInactiveList = consec.inactive.list.map((item, i) =>
-      <span key={i}><ii>{item}</ii>{i < consec.inactive.list.length - 1 && ', '}</span>
+      <span key={i}><ii><l>{item}</l></ii>{i < consec.inactive.list.length - 1 && ', '}</span>
     );
 
     return (
@@ -23,8 +23,8 @@ class Stats extends Component {
         {renderHTML(unitSentence)}
         <span className={unit === 'day' ? 'show-inline' : 'hide'}>
           This means in average
-          {` `}<i>{(stats.active[unit] / 52).toFixed(1)}<l>days/week</l></i>
-          {` `}and <i>{(stats.active[unit] / 12).toFixed(1)}<l>days/month</l></i>.
+          {` `}<ii>{(stats.active[unit] / 52).toFixed(1)}<l>days/week</l></ii>
+          {` `}and <ii>{(stats.active[unit] / 12).toFixed(1)}<l>days/month</l></ii>.
         </span>
         <br/>
         Record for consecutive {unit}s of {this.props.topic} is

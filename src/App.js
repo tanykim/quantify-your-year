@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'underscore';
 import Summary from './components/Summary';
 import Legend from './components/vis/Legend';
 import Visualization from './components/Visualization';
@@ -8,17 +9,19 @@ import ByDay from './components/ByDay';
 import { getSum, getAverages, getCalendar, getStatsByUnit, getDataByDay } from './processors/analysis';
 import { getDimensions } from './processors/dimensions';
 import { capitalize } from './processors/formats';
+import { colors } from './processors/colors';
+import { Icon } from 'react-fa';
 
 class App extends Component {
   constructor(props) {
     super(props);
     const dataId = this.props.params.dataId || 'tanyofish-swimming-2016';
     const setting = require(`./settings/${dataId}.json`);
-    // setColorPallette(setting.color);
     const data = require(`./data/${dataId}.json`);
     const year = setting.year;
     this.state = {
       setting: setting,
+      color: setting.color || _.sample(_.keys(colors)),
       data: data,
       unit: 'day',
       sum: getSum(data),
@@ -51,7 +54,7 @@ class App extends Component {
   render() {
     const s = this.state.setting;
     return (
-      <div className={s.color}>
+      <div className={this.state.color}>
         <div className={this.state.isScrolled ? 'header-fixed' : 'header'}>
             <div className="author">{capitalize(s.author)}'s</div>
             <div className="topic">{capitalize(s.topic)} in {s.year}</div>
@@ -64,22 +67,35 @@ class App extends Component {
         </div>
         <div className="row unit-selection">
           <div className="col-xs-12 col-md-6">
-            <input type="radio" name="unit" checked={this.state.unit === 'day'} onChange={this.onChange} value="day"/>Day
-            <input type="radio" name="unit" checked={this.state.unit === 'week'} onChange={this.onChange} value="week" />Week
-            <input type="radio" name="unit" checked={this.state.unit === 'month'} onChange={this.onChange} value="month" />Month
+            <span className="input">
+              <input type="radio" name="unit" checked={this.state.unit === 'day'} onChange={this.onChange} value="day"/>
+              Day
+            </span>
+            <span className="input">
+              <input type="radio" name="unit" checked={this.state.unit === 'week'} onChange={this.onChange} value="week" />
+              Week
+            </span>
+            <span className="input">
+              <input type="radio" name="unit" checked={this.state.unit === 'month'} onChange={this.onChange} value="month" />Month
+            </span>
           </div>
           <div className="col-xs-12 col-md-6">
             <Legend
+              containerW={this.state.dims.containerW}
               rectW={this.state.dims.rectW}
+              marginRight={this.state.dims.margin.right}
               range={this.state.calendar.range}
               unit={this.state.unit}
-              color={s.color}
+              color={this.state.color}
             />
+          </div>
+          <div className="col-xs-12 visible-xs-block visible-sm-block slider">
+            <Icon name="arrow-circle-left" /> Slide calender <Icon name="arrow-circle-right" />
           </div>
           <Visualization
             data={this.state.data}
             year={s.year}
-            color={s.color}
+            color={this.state.color}
             unit={this.state.unit}
             dims={this.state.dims}
             abbr={s.abbr}
@@ -103,8 +119,20 @@ class App extends Component {
           abbr={s.abbr}
           dims={this.state.dims} />
         <div className="row">
-          <div className="col-xs-12  footer">
-            View on <a href="https://github.com/tanykim/activity-log" target="_blank">GitHub</a>
+          <div className="col-xs-12 footer">
+            <span className="link">Share
+              <a href="https://twitter.com/intent/tweet?text=Visualization of personal activity data of a calendar year by @tanykim at http%3A%2F%2Ftany.kim/quantify-your-year %23dataviz %23d3 %23quantifyself" target="_blank">
+                <Icon name="twitter" />
+              </a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftany.kim/quantify-your-year" target="_blank">
+                <Icon name="facebook" />
+              </a>
+            </span>
+            <span className="link">Fork on
+              <a href="https://github.com/tanykim/quantify-your-year" target="_blank">
+                <Icon name="github" />
+              </a>
+            </span>
           </div>
         </div>
       </div>

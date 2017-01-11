@@ -20,12 +20,12 @@ body {
   padding-top: 24px;
   padding-bottom: 36px;
   .author {
-    font-size: 18px;
+    font-size: 24px;
   }
   .topic {
     font-size: 42px;
     font-weight: bold;
-    line-height: 36px;
+    line-height: 48px;
   }
 }
 .header-fixed {
@@ -49,22 +49,29 @@ body {
     margin-right: 8px;
   }
 }
-
 .summary, .max, .stats, .byDay {
   padding-top: 24px;
   padding-bottom: 24px;
   font-weight: 500;
   font-size: 24px;
-  line-height: 180%;
+  line-height: 120%;
 }
 .summary, {
   border-top: 1px solid #e9ecef;
   border-bottom: 1px solid #e9ecef;
 }
+.fixed {
+  overflow-x: auto;
+}
+.slider {
+  color: #868e96;
+  padding: 8px;
+  font-size: 16px;
+}
 .max, .stats {
   border-bottom: 1px solid #e9ecef;
 }
-.summary, .stats {
+.summary, .stats, .footer {
   background-color: #f8f9fa;
 }
 .unit-selection {
@@ -77,9 +84,14 @@ body {
     font-size: 24px;
     padding-bottom: 12px;
   }
+  .input {
+    display: inline-block;
+    margin-right: 16px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
   input {
-    vertical-align: middle;
-    margin-top: -8px;
     margin-right: 8px;
     margin-left: 16px;
     &:first-child {
@@ -89,7 +101,7 @@ body {
 }
 .legend {
   line-height: 90%;
-  text-align: right;
+  padding-top: 12px;
   .block {
     font-size: 1px;
     display: inline-block;
@@ -113,19 +125,52 @@ body {
 i {
   .highlight();
   color: #FFF;
-  l {
-    font-weight: 200;
-  }
+  display: inline-block;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 ii {
   .highlight();
+  display: inline-block;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+l {
+  font-weight: 200;
 }
 .footer {
+  font-size: 16px;
   margin-top: 36px;
   padding-top: 24px;
   padding-bottom: 24px;
   border-top: 1px solid #e9ecef;
   color: #868e96;
+  .link {
+    margin-right: 16px;
+    padding-right: 16px;
+    border-right: 1px solid #868e96;
+    &:last-child {
+      margin-right: 0;
+      padding-right: 0;
+      border-right: none;
+    }
+    a {
+      margin-right: 6px;
+      &:first-child {
+        margin-left: 6px;
+      };
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
 }
 
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .legend {
+    text-align: right;
+    padding-top: 0;
+  }
+}
 @import 'less/Visualization';

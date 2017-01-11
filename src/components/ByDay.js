@@ -19,14 +19,18 @@ class ByDay extends Component {
     return (
       <div className="row unit-selection">
         <div className="col-xs-12 title">
-          See your {this.props.topic} by day
+          See the {capitalize(this.props.topic)} Data by Day
         </div>
         <div className="col-xs-12">
           <div className={this.props.showRadio ? 'show' : 'hide'}>
-            <input type="radio" name="bar" checked={this.state.selection === 'value'} onChange={this.onChange} value="value" />
+            <span className="input">
+              <input type="radio" name="bar" checked={this.state.selection === 'value'} onChange={this.onChange} value="value" />
               Total {capitalize(this.props.metric)} ({this.props.abbr})
-            <input type="radio" name="bar" checked={this.state.selection === 'freq'} onChange={this.onChange} value="freq"/>
+            </span>
+            <span className="input">
+              <input type="radio" name="bar" checked={this.state.selection === 'freq'} onChange={this.onChange} value="freq"/>
               Occurance (times)
+            </span>
           </div>
         </div>
         <div className="col-xs-12">

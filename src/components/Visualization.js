@@ -20,7 +20,7 @@ class Visualization extends Component {
   render() {
     const dims = this.props.dims;
     return (
-      <div className="col-xs-12">
+      <div className="col-xs-12 fixed">
         <svg
           width={dims.w + dims.margin.left + dims.margin.right}
           height={dims.h + dims.margin.legend + dims.margin.top + dims.margin.bottom}

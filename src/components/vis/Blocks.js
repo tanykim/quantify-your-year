@@ -10,10 +10,12 @@ class Block extends Component {
     this.onMouseOver = this.onMouseOver.bind(this);
     this.onMouseOut = this.onMouseOut.bind(this);
   }
-  onMouseOver() {
+  onMouseOver(e) {
+    e.preventDefault()
     this.props.rectHovered(true, this.props.x, this.props.y, this.props.id, this.props.value);
   }
-  onMouseOut() {
+  onMouseOut(e) {
+    e.preventDefault()
     this.props.rectHovered(false);
   }
 }
@@ -27,7 +29,9 @@ class Rect extends Block {
       height={this.props.height}
       fill={getFillColor(this.props.value)}
       onMouseOver={this.onMouseOver}
+      onTouchStart={this.onMouseOver}
       onMouseOut={this.onMouseOut}
+      onTouchEnd={this.onMouseOut}
     />)
   }
 }
@@ -42,7 +46,9 @@ class Line extends Block {
       stroke={getFillColor(this.props.value)}
       strokeWidth={this.props.width}
       onMouseOver={this.onMouseOver}
+      onTouchStart={this.onMouseOver}
       onMouseOut={this.onMouseOut}
+      onTouchEnd={this.onMouseOut}
     />)
   }
 }
@@ -52,7 +58,9 @@ class Path extends Block {
       d={this.props.d}
       fill={getFillColor(this.props.value)}
       onMouseOver={this.onMouseOver}
+      onTouchStart={this.onMouseOver}
       onMouseOut={this.onMouseOut}
+      onTouchEnd={this.onMouseOut}
     />)
   }
 }

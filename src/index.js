@@ -6,7 +6,6 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import './index.css';
 
 ReactDOM.render(
-  // <App />,
   <Router history={hashHistory}>
     <Route path="/" component={App}/>
     <Route path="/:dataId" component={App}/>

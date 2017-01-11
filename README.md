@@ -1,5 +1,5 @@
-# activity-log
-Calendar-based visualization of one kind of activity
+# Quantify Your Year
+Calendar-based visualization of one kind of activity over the course of a calendar year
 
 ## URL and Datasets
 The URL would be ```your_project_address/#/[AUTHOR]-[ACTIVITY_TOPIC]-[YEAR]```.
@@ -12,16 +12,24 @@ The setting file contains following information. For example,
 {
   "year": 2016,
   "author": "Tanyoung",
-  "gender": "female", //gender of the person, choose from female, male, and other
+  "gender": "female",
   "topic": "swimming",
   "pastVerb": "swam", //verb matching the activity topic
   "type": "distance", //measurement of the activity, e.g., duration, distance, steps
   "metric": "yard", //unit of the type, use singular form. e.g., minute, meter, step,
-  "abbr": "yd", //same as metric if no abbreviation is common. e.g., m, yd, km,
-  "considerFrequency": true //false if most of the days have data so the number of days with valid data does not give insights.
-  "color": "blue" //choose the highlight color from blue, red
+  "abbr": "yd", //
+  "considerFrequency": true //
+  "color": "blue" //
 }
 ```
+* Gender: gender of the person, choose from female, male, and other
+* Past Verb: a past tense verb matching the activity topic
+* type: Measurement of the activity, e.g., duration, distance, steps
+* Meric: Unit of the type, use singular form. e.g., minute, meter, step,
+* Abbr: Same as metric if no abbreviation is common. e.g., m, yd, km
+* Consider Frequency: False if most of the days have data so the number of days with valid data does not give insights.
+* Color: Choose the highlight color from blue, red, teal, green, purple. If not configured, one color is randomly selected.
+
 If the frequency matters (e.g., one may not swim every day), this project provides further analysis including consecutive days/week/month.
 
 ## Data File Format

@@ -6,11 +6,11 @@ const colors = {
   red: ['lightyellow', 'orange', 'deeppink', 'darkred'],
   green: ['lightyellow', 'lightgreen', 'darkgreen'],
   teal: ['lightyellow', 'turquoise', 'Teal'],
-  purple: ['lightyellow', 'coral', 'mediumvioletred', 'purple']
+  purple: ['lightyellow', 'coral', 'mediumvioletred', 'purple'],
+  brown: ['lightyellow', 'LightSalmon', 'darkOrange', 'Brown']
 }
 
 var brewer;
- // = chroma.bezier(['#ffec99', '#1862AB']).scale();
 var steps;
 var distance;
 var maxColor;
@@ -36,4 +36,4 @@ function getFillColor(val) {
 function getMaxColor() {
   return maxColor;
 }
-export { getColorRange, getFillColor, getMaxColor };
+export { colors, getColorRange, getFillColor, getMaxColor };

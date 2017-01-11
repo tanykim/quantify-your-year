@@ -7,6 +7,5 @@
   "type": "distance",
   "metric": "yard",
   "abbr": "yd",
-  "considerFrequency": true,
-  "color": "blue"
+  "considerFrequency": true
 }

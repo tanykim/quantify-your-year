@@ -20,7 +20,7 @@
   background-color: darkred;
 }
 .red ii {
-  background-color: deeppink;
+  background-color: orange;
 }
 .red a {
   color: darkred;
@@ -61,6 +61,18 @@
 .purple a {
   color: purple;
 }
+.brown .author {
+  color: Brown;
+}
+.brown i {
+  background-color: Brown;
+}
+.brown ii {
+  background-color: darkOrange;
+}
+.brown a {
+  color: Brown;
+}
 body {
   margin: 0;
   padding: 0;
@@ -80,12 +92,12 @@ body {
   padding-bottom: 36px;
 }
 .header .author {
-  font-size: 18px;
+  font-size: 24px;
 }
 .header .topic {
   font-size: 42px;
   font-weight: bold;
-  line-height: 36px;
+  line-height: 48px;
 }
 .header-fixed {
   position: fixed;
@@ -117,18 +129,27 @@ body {
   padding-bottom: 24px;
   font-weight: 500;
   font-size: 24px;
-  line-height: 180%;
+  line-height: 120%;
 }
 .summary {
   border-top: 1px solid #e9ecef;
   border-bottom: 1px solid #e9ecef;
+}
+.fixed {
+  overflow-x: auto;
+}
+.slider {
+  color: #868e96;
+  padding: 8px;
+  font-size: 16px;
 }
 .max,
 .stats {
   border-bottom: 1px solid #e9ecef;
 }
 .summary,
-.stats {
+.stats,
+.footer {
   background-color: #f8f9fa;
 }
 .unit-selection {
@@ -142,9 +163,14 @@ body {
   font-size: 24px;
   padding-bottom: 12px;
 }
+.unit-selection .input {
+  display: inline-block;
+  margin-right: 16px;
+}
+.unit-selection .input:last-child {
+  margin-right: 0;
+}
 .unit-selection input {
-  vertical-align: middle;
-  margin-top: -8px;
   margin-right: 8px;
   margin-left: 16px;
 }
@@ -153,7 +179,7 @@ body {
 }
 .legend {
   line-height: 90%;
-  text-align: right;
+  padding-top: 12px;
 }
 .legend .block {
   font-size: 1px;
@@ -179,21 +205,64 @@ i {
   font-weight: normal;
   padding: 0 8px;
   color: #FFF;
-}
-i l {
-  font-weight: 200;
+  display: inline-block;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 ii {
   font-style: normal;
   font-weight: normal;
   padding: 0 8px;
+  display: inline-block;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+l {
+  font-weight: 200;
 }
 .footer {
+  font-size: 16px;
   margin-top: 36px;
   padding-top: 24px;
   padding-bottom: 24px;
   border-top: 1px solid #e9ecef;
   color: #868e96;
+}
+.footer .link {
+  margin-right: 16px;
+  padding-right: 16px;
+  border-right: 1px solid #868e96;
+}
+.footer .link:last-child {
+  margin-right: 0;
+  padding-right: 0;
+  border-right: none;
+}
+.footer .link a {
+  margin-right: 6px;
+}
+.footer .link a:first-child {
+  margin-left: 6px;
+}
+.footer .link a:last-child {
+  margin-right: 0;
+}
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .legend {
+    text-align: right;
+    padding-top: 0;
+  }
+}
+text {
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  cursor: default;
 }
 .block:hover {
   stroke: #212529;

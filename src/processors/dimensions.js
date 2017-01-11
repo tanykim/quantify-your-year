@@ -6,8 +6,7 @@ function getDimensions(year) {
   const endDate = startDate.clone().endOf('year');
   const noOfWeeks = Math.ceil(endDate.diff(startDate.clone().startOf('week'), 'days') / 7);
 
-  //bootstrap max width is 1140
-  const containerW = Math.min(1140, document.getElementById('root').clientWidth);
+  const containerW = document.getElementById('width').clientWidth - 30;
 
   let margin = {
     legend: 20,
@@ -16,10 +15,11 @@ function getDimensions(year) {
     bottom: 8
   };
 
-  const rectW = Math.max(Math.floor((containerW - margin.left) / noOfWeeks), 16);
+  const rectW = Math.max(Math.floor((containerW - margin.left) / noOfWeeks), 20);
   //calibrate margin-right to aling legend and calendar-graph
   margin.right = rectW;
-  margin.left = Math.max(40, containerW - rectW * noOfWeeks - margin.right);
+  const w = rectW * noOfWeeks;
+  margin.left = Math.max(40, containerW - w - margin.right);
 
   //vis dimensions
   return {
@@ -30,7 +30,8 @@ function getDimensions(year) {
     rectW: rectW,
     margin: margin,
     w: noOfWeeks * rectW,
-    h: rectW * 7
+    h: rectW * 7,
+    containerW: containerW
   };
 }
 
