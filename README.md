@@ -14,12 +14,12 @@ The setting file contains following information. For example,
   "author": "Tanyoung",
   "gender": "female",
   "topic": "swimming",
-  "pastVerb": "swam", //verb matching the activity topic
-  "type": "distance", //measurement of the activity, e.g., duration, distance, steps
-  "metric": "yard", //unit of the type, use singular form. e.g., minute, meter, step,
-  "abbr": "yd", //
-  "considerFrequency": true //
-  "color": "blue" //
+  "pastVerb": "swam",
+  "type": "distance",
+  "metric": "yard",
+  "abbr": "yd",
+  "considerFrequency": true
+  "color": "blue"
 }
 ```
 * Gender: gender of the person, choose from female, male, and other
@@ -48,12 +48,17 @@ The data should be an array of dates with valid numbered data value. For example
 ```
 If you log your data on Google Spreadsheet, try this convenient [converter](https://www.npmjs.com/package/google-spreadsheet-to-json).
 
-## Compile CSS
+## Development
 ```
-lessc src/index.less src/index.css
+npm install
+npm start
 ```
-## Development & Build
-```npm start``` for local development and ```npm run build``` for production-ready files.
+
+## Build
+For production-ready files
+```
+npm run build
+```
 
 ## Made with React
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
