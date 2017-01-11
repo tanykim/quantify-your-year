@@ -22,10 +22,12 @@ function locale(n) {
 
 //add SI prefix - k, M...
 function prefix(n) {
-  if (n >= 0.0001 && n < 10000) {
+  if (n === 0) {
+    return 0;
+  } else if (n >= 0.0001 && n < 10000) {
     return n;
   } else {
-    return d3.format('.0s')(n);
+    return d3.format('.2s')(n);
   }
 }
 
