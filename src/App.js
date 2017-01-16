@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'underscore';
+import Menu from './components/Menu';
 import Summary from './components/Summary';
 import Legend from './components/vis/Legend';
 import Visualization from './components/Visualization';
@@ -15,11 +16,28 @@ import { Icon } from 'react-fa';
 class App extends Component {
   constructor(props) {
     super(props);
-    const dataId = this.props.params.dataId || 'tanyofish-swimming-2016';
+    this.onChange = this.onChange.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  componentWillMount() {
+    this.updateStates(this.props.params.dataId);
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.params.dataId !== prevProps.params.dataId) {
+      this.updateStates(this.props.params.dataId);
+    }
+  }
+
+  updateStates(url) {
+    const dataId = url || 'tanyofish-swimming-2016';
     const setting = require(`./settings/${dataId}.json`);
     const data = require(`./data/${dataId}.json`);
     const year = setting.year;
-    this.state = {
+    this.setState({
       setting: setting,
       color: setting.color || _.sample(_.keys(colors)),
       data: data,
@@ -29,14 +47,10 @@ class App extends Component {
       dims: getDimensions(year),
       calendar: getCalendar(data, year),
       stats: setting.considerFrequency ? getStatsByUnit(data, year) : null,
-      byDay: getDataByDay(data)
-    };
-    this.onChange = this.onChange.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
-  }
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
+      byDay: getDataByDay(data),
+      menuOpen: false,
+      dataId: dataId
+    });
   }
 
   handleScroll(event) {
@@ -51,6 +65,10 @@ class App extends Component {
     this.setState({unit: e.target.value});
   }
 
+  toggleMenu(willClose) {
+    this.setState({menuOpen: !willClose || !this.state.menuOpen});
+  }
+
   render() {
     const s = this.state.setting;
     return (
@@ -58,6 +76,15 @@ class App extends Component {
         <div className={this.state.isScrolled ? 'header-fixed' : 'header'}>
             <div className="author">{capitalize(s.author)}'s</div>
             <div className="topic">{capitalize(s.topic)} in {s.year}</div>
+            <div className="menu">
+              <Icon name="bars" size="2x" onClick={this.toggleMenu} className="hidden-md hidden-lg menu-icon"/>
+              <div onClick={this.toggleMenu} className="visible-md-block visible-lg-block menu-text">
+                Datasets <Icon name={`chevron-${this.state.menuOpen? 'up' : 'down'}`} onClick={this.toggleMenu} className="menu-icon"/>
+              </div>
+              <div className={this.state.menuOpen ? 'menu-content show' : 'menu-content hide'}>
+                <Menu close={this.toggleMenu} url={this.state.dataId}/>
+              </div>
+            </div>
         </div>
         <div className="row">
           <Summary

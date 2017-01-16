@@ -1,12 +1,14 @@
 import moment from 'moment';
 import _ from 'underscore';
 
+let containerW;
+
 function getDimensions(year) {
   const startDate = moment(year, 'YYYY');
   const endDate = startDate.clone().endOf('year');
   const noOfWeeks = Math.ceil(endDate.diff(startDate.clone().startOf('week'), 'days') / 7);
 
-  const containerW = document.getElementById('width').clientWidth - 30;
+  containerW = containerW || document.getElementById('width').clientWidth - 30;
 
   let margin = {
     legend: 20,

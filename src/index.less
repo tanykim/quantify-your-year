@@ -19,6 +19,7 @@ body {
 .header {
   padding-top: 24px;
   padding-bottom: 36px;
+  position: relative;
   .author {
     font-size: 24px;
   }
@@ -47,6 +48,66 @@ body {
   }
   .author {
     margin-right: 8px;
+  }
+}
+.menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 24px;
+  width: 100%;
+  z-index: 1000;
+  text-align: right;
+  .menu-text {
+    margin-bottom: 8px;
+  }
+  .menu-close {
+    letter-spacing: 0.05em;
+  }
+  .menu-icon {
+    cursor: pointer;
+  }
+  .menu-content {
+    display: none;
+    background-color: @main;
+    position: fixed;
+    top: 0;
+    color: #fff;
+    right: 0px;
+    padding: 24px;
+    text-align: left;
+    height: 100%;
+    .block {
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top:1px solid #495057;
+    }
+    .year {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      margin-bottom: 12px;
+      color: @sub;
+    }
+    .list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
+        text-transform: capitalize;
+        margin-bottom: 8px;
+        letter-spacing: 0.02em;
+        &:last-child {
+          margin-bottom: 0px;
+        }
+      }
+      li.selected {
+        color: @sub;
+      }
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+    }
   }
 }
 .summary, .max, .stats, .byDay {
@@ -172,5 +233,21 @@ l {
     text-align: right;
     padding-top: 0;
   }
+  .menu-content {
+    position: absolute !important;
+    top: unset !important;
+    height: unset !important;
+    .block {
+      &:first-child {
+        border-top: none;
+        padding-top: 0;
+        margin-top: 0;
+      }
+    }
+  }
+  .menu-close {
+    display: none;
+  }
 }
+
 @import 'less/Visualization';

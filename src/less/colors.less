@@ -1,4 +1,5 @@
 @main: #212529;
+@sub: #ced4da;
 
 @blue: #F0FFFF, #87CEEB, SlateBlue, #031968;
 @red: lightyellow, orange, deeppink, darkred;
@@ -8,39 +9,38 @@
 @brown: lightyellow, LightSalmon, darkOrange, Brown;
 
 .blue {
-  .author { color: extract(@blue, 4); }
+  .author, a { color: extract(@blue, 4); }
   i { background-color: extract(@blue, 4); }
   ii { background-color: extract(@blue, 2); }
-  a { color: extract(@blue, 4); }
-  .header-fixed { color: extract(@blue, 2); }
+  .text-highlight a { color: extract(@blue, 2) !important;}
 }
 .red {
-  .author { color: extract(@red, 4); }
+  .author, a { color: extract(@red, 4); }
   i { background-color: extract(@red, 4); }
   ii { background-color: extract(@red, 2); }
-  a { color: extract(@red, 4); }
+  .text-highlight a { color: extract(@red, 2) !important; }
 }
 .green {
-  .author { color: extract(@green, 3); }
+  .author, a { color: extract(@green, 3); }
   i { background-color: extract(@green, 3); }
   ii { background-color: extract(@green, 2); }
-  a { color: extract(@green, 3); }
+  .text-highlight a { color: extract(@green, 2) !important; }
 }
 .teal {
-  .author { color: extract(@teal, 3); }
+  .author, a { color: extract(@teal, 3); }
   i { background-color: extract(@teal, 3); }
   ii { background-color: extract(@teal, 2); }
-  a { color: extract(@teal, 3); }
+  .text-highlight a { color: extract(@teal, 2) !important; }
 }
 .purple {
-  .author { color: extract(@purple, 4); }
+  .author, a { color: extract(@purple, 4); }
   i { background-color: extract(@purple, 4); }
   ii { background-color: extract(@purple, 2); }
-  a { color: extract(@purple, 4); }
+  .text-highlight a { color: extract(@purple, 2) !important; }
 }
 .brown {
-  .author { color: extract(@brown, 4); }
+  .author, a { color: extract(@brown, 4); }
   i { background-color: extract(@brown, 4); }
   ii { background-color: extract(@brown, 3); }
-  a { color: extract(@brown, 4); }
+  .text-highlight a { color: extract(@brown, 3) !important; }
 }
