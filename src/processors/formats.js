@@ -4,7 +4,7 @@ import _ from 'underscore';
 
 //abc -> Abc
 function capitalize(str) {
-  return str[0].charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  return str[0].charAt(0).toUpperCase() + str.slice(1);
 }
 
 //e.g., 1200 unit -> 1,200 units

@@ -1,0 +1,14 @@
+{
+  "year": 2016,
+  "author": "tanyoung",
+  "gender": "female",
+  "topic": "time at Cafe",
+  "pastVerb": "spent time at cafes",
+  "type": "duration",
+  "metric": "minute",
+  "dataSource": {
+    "name": "Moves App",
+    "url": "http://moves-app.com/"
+  },
+  "considerFrequency": true
+}

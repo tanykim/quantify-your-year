@@ -7,12 +7,13 @@ class Summary extends Component {
       <div className="col-xs-12 summary">
         {capitalize(this.props.author)} {this.props.pastVerb}
         {this.props.type === 'duration' ? ` for ` : ` total `}
-        <i>{pluralize(this.props.sum, this.props.metric)}</i>. <br />
-        {pronoun(this.props.gender, true)} {this.props.pastVerb} in average
-        {` `}<ii>{this.props.averages.day}<l>{this.props.abbr}/day</l></ii>,
+        <i>{pluralize(this.props.sum, this.props.metric)}</i>:
+        {` `}in average <ii>{pluralize(this.props.averages.day, this.props.metric)}</ii>
+        {` `}per {this.props.considerFrequency ? ` an active` : `a` } day.
+        <br />
+        {` `}Over the whole year, {pronoun(this.props.gender, false)} {this.props.pastVerb}
         {` `}<ii>{this.props.averages.week}<l>{this.props.abbr}/week</l></ii>, and
-        {` `}<ii>{this.props.averages.month}<l>{this.props.abbr}/month</l></ii>
-        {this.props.considerFrequency ? ` on those active days.` : `.` }
+        {` `}<ii>{this.props.averages.month}<l>{this.props.abbr}/month</l></ii>.
       </div>
     );
   }

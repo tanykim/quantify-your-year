@@ -37,6 +37,7 @@ class App extends Component {
     const setting = require(`./settings/${dataId}.json`);
     const data = require(`./data/${dataId}.json`);
     const year = setting.year;
+    setting.abbr = setting.abbr || ` ${setting.metric}s`;
     this.setState({
       setting: setting,
       color: setting.color || _.sample(_.keys(colors)),
@@ -160,6 +161,13 @@ class App extends Component {
                 <Icon name="github" />
               </a>
             </span>
+            {s.dataSource &&
+              <span className="link">Powered by
+                <a href={s.dataSource.url} target="_blank">
+                  {s.dataSource.name}
+                </a>
+              </span>
+            }
           </div>
         </div>
       </div>

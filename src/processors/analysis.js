@@ -15,14 +15,24 @@ function getNumberOfDaysInYear(year) {
 }
 
 function getAverages(data, year) {
-  const byDay = getSum(data) / data.length;
-  const byWeek = byDay * 7;
-  const byMonth = byDay * getNumberOfDaysInYear(year);
+  const sum = getSum(data);
+  const byDay = sum / data.length;
+  const byWeek = sum / getNumberOfDaysInYear(year) * 7;
+  const byMonth = getSum(data) / 12;
   return {
     day: locale(byDay),
     week: locale(byWeek),
     month: locale(byMonth)
   }
+}
+
+function getWeek(date) {
+  const md = moment(date, 'M/D/YYYY');
+  let wId = md.week();
+  if (wId === 1 && md.month() === 11) {
+    wId = md.add(-7, 'days').week() + 1;
+  }
+  return wId;
 }
 
 function mapDataByUnit(data, year) {
@@ -36,10 +46,10 @@ function mapDataByUnit(data, year) {
   };
   _.each(data, function (d, i) {
     //week
-    let w = moment(d.date, 'M/D/YYYY').week() - 1;
+    let w = getWeek(d.date) - 1;
     if (i === 0) {
       byUnit.week[w] = d.value;
-    } else if (moment(d.date, 'M/D/YYYY').week() > moment(data[i-1].date, 'M/D/YYYY').week()) {
+    } else if (getWeek(d.date) > getWeek(data[i-1].date)) {
       byUnit.week[w] = d.value;
     } else {
       byUnit.week[w] += d.value;
@@ -184,4 +194,4 @@ function getDataByDay(data) {
   });
 }
 
-export { getSum, getAverages, getCalendar, getStatsByUnit, getDataByDay };
+export { getSum, getAverages, getWeek, getCalendar, getStatsByUnit, getDataByDay };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import _ from 'underscore';
 import { getPoints, getAreaPath } from './../../processors/dimensions';
+import { getWeek } from './../../processors/analysis';
 import { getFillColor } from './../../processors/colors';
 
 class Block extends Component {
@@ -70,7 +71,7 @@ class Blocks extends Component {
     const rectW = this.props.rectW;
     const dayItems = this.props.data.map((item) =>
       (<Rect
-        x={(moment(item.date, 'M/D/YYYY').week() - 1) * rectW}
+        x={(getWeek(item.date) - 1) * rectW}
         y={moment(item.date, 'M/D/YYYY').day() * rectW}
         width={rectW}
         height={rectW}
@@ -88,7 +89,7 @@ class Blocks extends Component {
         x={+item[0] * rectW + rectW / 2}
         y={+item[0] === 0 ? moment(this.props.year, 'YYYY').day() * rectW : 0}
         width={rectW}
-        y2={rectW * (+item[0] === this.props.calendar.total.week -1 ? moment(this.props.year + 1, 'YYYY').add(-1, 'days').day() + 1 : 7)}
+        y2={rectW * (+item[0] === this.props.calendar.total.week ? moment(this.props.year + 1, 'YYYY').add(-1, 'days').day() + 1 : 7)}
         key={+item[0]}
         id={+item[0]}
         value={item[1]}
@@ -98,7 +99,7 @@ class Blocks extends Component {
     const monthData = _.map(this.props.calendar.byUnit.month, function (v, k) {
       return [k, v];
     });
-    const monthItems = monthData.map((item) => {
+    const monthItems = monthData.map((item, i) => {
       const path = getAreaPath(this.props.rectW, this.props.h, this.props.margin, this.props.year, item[0]);
       const points = getPoints(this.props.rectW, this.props.h, this.props.margin, this.props.year, item[0]);
       return  (<Path

@@ -25,7 +25,7 @@ class ByDay extends Component {
           <div className={this.props.showRadio ? 'show' : 'hide'}>
             <span className="input">
               <input type="radio" name="bar" checked={this.state.selection === 'value'} onChange={this.onChange} value="value" />
-              Total {capitalize(this.props.metric)} ({this.props.abbr})
+              Total {capitalize(this.props.metric)} ({this.props.metric}s)
             </span>
             <span className="input">
               <input type="radio" name="bar" checked={this.state.selection === 'freq'} onChange={this.onChange} value="freq"/>

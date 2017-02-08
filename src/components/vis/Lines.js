@@ -30,7 +30,7 @@ class VerticalLines extends Component {
         x1={week * w}
         x2={week * w}
         y1={week === 0 ? this.props.startDay * w : 0}
-        y2={this.props.h}
+        y2={week === this.props.noOfWeeks ? (this.props.endDay + 1) * w : this.props.h}
         key={week}
       />)
     );

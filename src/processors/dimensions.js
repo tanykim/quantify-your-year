@@ -38,14 +38,14 @@ function getDimensions(year) {
 }
 
 function getPoints(rectW, h, margin, year, month, sd, sw) {
-  const startDay = _.isUndefined(sd) ? moment([year, month]).day() : sd;
+  const startDay =  _.isUndefined(sd) ? moment([year, month]).day() : sd;
   const startWeek = sw || moment([year, month]).week() - 1;
 
   const x = startWeek * rectW;
   const y = startDay * rectW;
 
   const sY = h + margin.bottom;
-  const diff = startDay === 0 ? 0 : rectW;
+  const diff = startDay > 0 ? rectW : 0;
   const eY = -margin.top;
 
   return {x, y, sY, diff, eY, startDay, startWeek};
@@ -58,14 +58,18 @@ function getPath(props, month) {
 
 function getAreaPath(rectW, h, margin, year, month) {
   const sp = getPoints(rectW, h, margin, year, month);
+  // console.log(sp);
   let np;
   if (+month < 11) {
     np = getPoints(rectW, h, margin, year, +month + 1);
   } else {
-    //December has 31 days, 31 % 7 = 3
-    np = getPoints(rectW, h, margin, year, +month + 1, 7 % (sp.startDay + 3), sp.startWeek + 5);
+    // December has 31 days, 31 % 7 = 3
+    const nysd = (sp.startDay + 3) % 7;
+    // Even if the new year's first day is Sunday, diff should be rectW
+    const nyw = sp.startWeek + (nysd === 0 ? 5 : 4);
+    np = getPoints(rectW, h, margin, year, null, nysd, nyw);
   }
-  return `M ${sp.x}, ${h} V ${sp.y} h ${sp.diff} V 0 H ${np.x} h ${np.diff} V ${h} Z`;
+  return `M ${sp.x}, ${h} V ${sp.y} h ${sp.diff} V 0 H ${np.x} h ${np.diff} V ${np.y} h ${-np.diff} V ${h} Z`;
 }
 
 export { getDimensions, getPoints, getPath, getAreaPath };

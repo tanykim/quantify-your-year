@@ -23,8 +23,8 @@ class Stats extends Component {
         {renderHTML(unitSentence)}
         <span className={unit === 'day' ? 'show-inline' : 'hide'}>
           This means in average
-          {` `}<ii>{(stats.active[unit] / 52).toFixed(1)}<l>days/week</l></ii>
-          {` `}and <ii>{(stats.active[unit] / 12).toFixed(1)}<l>days/month</l></ii>.
+          {` `}<ii>{(stats.active[unit] / 52).toFixed(1)} <l>days/week</l></ii>
+          {` `}and <ii>{(stats.active[unit] / 12).toFixed(1)} <l>days/month</l></ii>.
         </span>
         <br/>
         Record for consecutive {unit}s of {this.props.topic} is
