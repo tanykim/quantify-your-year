@@ -33,7 +33,7 @@ class App extends Component {
   }
 
   updateStates(url) {
-    const dataId = url || 'tanyofish-swimming-2016';
+    const dataId = url || 'tanyofish-swimming-2017';
     const setting = require(`./settings/${dataId}.json`);
     const data = require(`./data/${dataId}.json`);
     const year = setting.year;
@@ -149,15 +149,15 @@ class App extends Component {
         <div className="row">
           <div className="col-xs-12 footer">
             <span className="link">Share
-              <a href="https://twitter.com/intent/tweet?text=Visualization of personal activity data of a calendar year by @tanykim at http%3A%2F%2Ftany.kim/quantify-your-year %23dataviz %23d3 %23quantifyself" target="_blank">
+              <a rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=Visualization of personal activity data of a calendar year by @tanykim at http%3A%2F%2Ftany.kim/quantify-your-year %23dataviz %23d3 %23quantifyself" target="_blank">
                 <Icon name="twitter" />
               </a>
-              <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftany.kim/quantify-your-year" target="_blank">
+              <a rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftany.kim/quantify-your-year" target="_blank">
                 <Icon name="facebook" />
               </a>
             </span>
             <span className="link">Fork on
-              <a href="https://github.com/tanykim/quantify-your-year" target="_blank">
+              <a rel="noopener noreferrer" href="https://github.com/tanykim/quantify-your-year" target="_blank">
                 <Icon name="github" />
               </a>
             </span>

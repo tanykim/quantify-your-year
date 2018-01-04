@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'underscore';
 import Blocks from './vis/Blocks.js';
 import { HorizontalLines, VerticalLines } from './vis/Lines.js';
 import DayTexts from './vis/DayTexts.js';

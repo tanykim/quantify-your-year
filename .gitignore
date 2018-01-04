@@ -17,3 +17,4 @@ npm-debug.log
 # test files
 src/data/test-*.json
 src/settings/test-*.json
+package-lock.json

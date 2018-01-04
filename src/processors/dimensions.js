@@ -4,9 +4,11 @@ import _ from 'underscore';
 let containerW;
 
 function getDimensions(year) {
-  const startDate = moment(year, 'YYYY');
-  const endDate = startDate.clone().endOf('year');
-  const noOfWeeks = Math.ceil(endDate.diff(startDate.clone().startOf('week'), 'days') / 7);
+  const startDate = moment(`${year}0101`, 'YYYYMMDD');
+  const endDate = moment(`${year}1231`, 'YYYYMMDD');
+  const startWeek = startDate.clone().startOf('week');
+  const endWeek = endDate.clone().add(7, 'day').startOf('week');
+  const noOfWeeks = endWeek.diff(startWeek, 'weeks');
 
   containerW = containerW || document.getElementById('width').clientWidth - 30;
 

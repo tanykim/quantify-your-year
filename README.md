@@ -4,7 +4,7 @@ Calendar-based visualization of one kind of activity over the course of a calend
 ## URL and Datasets
 The URL would be ```your_project_address/#/[AUTHOR]-[ACTIVITY_TOPIC]-[YEAR]```.
 Name your data and setting files following the convention above (e.g., tanyoung-swimming-2016.json).
-Save the two files in ```src/data``` and ```src/settings``` respectively.
+Save the two files in ```src/data``` and ```src/settings``` respectively. Also update ```src/settings/datasets.json```.
 
 ## Setting File Format
 The setting file contains following information. For example,
