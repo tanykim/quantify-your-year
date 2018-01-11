@@ -1,0 +1,12 @@
+{
+  "year": 2017,
+  "author": "plabinu",
+  "gender": "female",
+  "topic": "swimming",
+  "pastVerb": "swam",
+  "type": "distance",
+  "metric": "meter",
+  "abbr": "m",
+  "considerFrequency": true,
+  "color": "purple"
+}

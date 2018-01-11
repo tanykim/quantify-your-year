@@ -21,23 +21,22 @@ class Stats extends Component {
     return (
       <div className="col-xs-12 stats">
         {renderHTML(unitSentence)}
-        <span className={unit === 'day' ? 'show-inline' : 'hide'}>
+        <div className={unit === 'day' ? 'show-inline' : 'hide'}>
           This means in average
           {` `}<ii>{(stats.active[unit] / 52).toFixed(1)} <l>days/week</l></ii>
           {` `}and <ii>{(stats.active[unit] / 12).toFixed(1)} <l>days/month</l></ii>.
-        </span>
-        <br/>
-        Record for consecutive {unit}s of {this.props.topic} is
-        {` `}<i>{pluralize(consec.active.count, unit)}</i>
-        <span className={consec.inactive.count > 0 ? 'show-inline' : 'hide'}>
+        </div>
+        {consec.active.count > 1 && <div>Record for consecutive {unit}s of {this.props.topic} is
+          {` `}<i>{pluralize(consec.active.count, unit)}</i>
+          <span className='show-inline'>
           , happened <ii>{consec.active.list.length}</ii> time
           {consec.active.list.length > 1 ? 's: ' : ': '}
-          {consecActiveList}.
-          <br/>
+          {consecActiveList}.</span>
+        </div>}
+        {consec.inactive.count > 1 && <div>
           Longest break was <i>{pluralize(consec.inactive.count, unit)}</i>:
           {` `}{consecInactiveList}.
-        </span>
-        <span className={consec.inactive.count === 0 ? 'show-inline' : 'hide'}>.</span>
+        </div> }
       </div>
     );
   }
