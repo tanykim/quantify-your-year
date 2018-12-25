@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BarChart from './vis/BarChart';
-import { capitalize } from './../processors/formats';
+import {capitalize} from './../processors/formats';
 
 class ByDay extends Component {
   constructor(props) {
@@ -16,16 +16,18 @@ class ByDay extends Component {
   }
 
   render() {
+    const {topic, considerFrequency, metric, data, color, dims} = this.props;
+
     return (
       <div className="row unit-selection">
         <div className="col-xs-12 title">
-          See the {capitalize(this.props.topic)} Data by Day
+          See the {capitalize(topic)} Data by Day
         </div>
         <div className="col-xs-12">
-          <div className={this.props.showRadio ? 'show' : 'hide'}>
+          <div className={considerFrequency ? 'show' : 'hide'}>
             <span className="input">
               <input type="radio" name="bar" checked={this.state.selection === 'value'} onChange={this.onChange} value="value" />
-              Total {capitalize(this.props.metric)} ({this.props.metric}s)
+              Total {capitalize(metric)} ({metric}s)
             </span>
             <span className="input">
               <input type="radio" name="bar" checked={this.state.selection === 'freq'} onChange={this.onChange} value="freq"/>
@@ -34,7 +36,7 @@ class ByDay extends Component {
           </div>
         </div>
         <div className="col-xs-12">
-          <BarChart {...this.props} {...this.state} />
+          <BarChart data={data} dims={dims} color={color} {...this.state} />
         </div>
       </div>
     );

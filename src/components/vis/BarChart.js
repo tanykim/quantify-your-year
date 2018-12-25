@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import _ from 'underscore';
 import DayTexts from './DayTexts';
-import { getMaxColor } from './../../processors/colors';
+import {getMaxColor} from './../../processors/colors';
+import {getDataByDay} from './../../processors/analysis';
 import * as d3 from 'd3';
 
 class Bars extends Component {
   render() {
-    const dim = this.props.dim;
-    const sel = this.props.sel;
-    const xScale = this.props.xScale;
-    const data = this.props.data;
+    const {dim, sel, xScale, color, data} = this.props;
 
     const barList = data.map((day, i) => (
       <rect
@@ -17,7 +14,7 @@ class Bars extends Component {
         y={i * dim.barH + dim.barH / 8}
         width={xScale(day[sel])}
         height={dim.barH / 8 * 6}
-        fill={getMaxColor()}
+        fill={getMaxColor(color)}
         key={i}
         />
     ));
@@ -60,7 +57,7 @@ class Axis extends Component {
   }
 
   render() {
-    const dim = this.props.dim;
+    const {dim} = this.props;
     return (
       <g
         transform={`translate(${dim.margin.left}, ${dim.margin.top + dim.h})`}
@@ -71,37 +68,33 @@ class Axis extends Component {
 }
 
 class BarChart extends Component {
-  constructor(props) {
-    super(props);
-    const dims = this.props.dims;
-    const margin = {
-      top: 20,
-      right: 80,
-      left: dims.margin.left,
-      bottom: 40
-    };
-    this.state = {
-      w: dims.containerW - margin.left - margin.right,
-      h: dims.h * 2,
-      barH: dims.h * 2 / 7,
-      margin
-    };
-  }
-
   render() {
-    const dim = this.state;
-    const sel = this.props.selection;
-    const maxVal = _.max(this.props.data.map((d) => d[sel]));
-    const xScale = d3.scaleLinear().domain([0, maxVal]).range([0, dim.w]);
+    const {selection, dims, color} = this.props;
+    const {containerW, h, margin} = dims;
+    const chartDim = {
+      w: containerW - margin.left - margin.right,
+      h: h * 2,
+      barH: h * 2 / 7,
+      margin: {
+        top: 20,
+        right: 80,
+        left: dims.margin.left,
+        bottom: 40
+      }
+    };
+
+    const data = getDataByDay(this.props.data);
+    const maxVal = Math.max(...data.map((d) => d[selection]));
+    const xScale = d3.scaleLinear().domain([0, maxVal]).range([0, chartDim.w]);
 
     return (
       <svg
-        width={dim.w + dim.margin.left + dim.margin.right}
-        height={dim.h + dim.margin.bottom}
+        width={chartDim.w + chartDim.margin.left + chartDim.margin.right}
+        height={chartDim.h + chartDim.margin.bottom}
       >
-        <DayTexts left={dim.margin.left} top={dim.margin.top} h={dim.barH} />
-        <Bars dim={dim} xScale={xScale} sel={sel} data={this.props.data} />
-        <Axis scale={xScale} dim={dim}/>
+        <DayTexts left={chartDim.margin.left} top={chartDim.margin.top} h={chartDim.barH} />
+        <Bars dim={chartDim} xScale={xScale} sel={selection} data={data} color={color} />
+        <Axis scale={xScale} dim={chartDim}/>
       </svg>
     );
   }

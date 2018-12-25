@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import moment from 'moment';
-import _ from 'underscore';
-import { getPoints, getAreaPath } from './../../processors/dimensions';
-import { getWeek } from './../../processors/analysis';
-import { getFillColor } from './../../processors/colors';
+import {getPoints, getAreaPath} from './../../processors/dimensions';
+import {getWeek} from './../../processors/analysis';
+import {getBlockColor} from './../../processors/colors';
 
 class Block extends Component {
   constructor(props) {
@@ -21,104 +20,98 @@ class Block extends Component {
   }
 }
 
+// day, month, year block
 class Rect extends Block {
   render() {
-    return (<rect
-      x={this.props.x}
-      y={this.props.y}
-      width={this.props.width}
-      height={this.props.height}
-      fill={getFillColor(this.props.value)}
+    const {x, y, width, height, fill} = this.props;
+    const svgProp = {x, y, width, height, fill};
+    return <rect
+      {...svgProp}
       onMouseOver={this.onMouseOver}
       onTouchStart={this.onMouseOver}
       onMouseOut={this.onMouseOut}
       onTouchEnd={this.onMouseOut}
-    />)
+    />;
   }
 }
 
 class Line extends Block {
   render() {
-    return (<line
-      x1={this.props.x}
-      y1={this.props.y}
-      x2={this.props.x}
-      y2={this.props.y2}
-      stroke={getFillColor(this.props.value)}
-      strokeWidth={this.props.width}
+    const {x, y, y2, stroke, strokeWidth} = this.props;
+    const svgProp = {x1: x, x2: x, y1: y, y2, stroke, strokeWidth}
+    return <line
+      {...svgProp}
       onMouseOver={this.onMouseOver}
       onTouchStart={this.onMouseOver}
       onMouseOut={this.onMouseOut}
       onTouchEnd={this.onMouseOut}
-    />)
+    />;
   }
 }
+
 class Path extends Block {
   render() {
-    return (<path
+    return <path
       d={this.props.d}
-      fill={getFillColor(this.props.value)}
+      fill={this.props.fill}
       onMouseOver={this.onMouseOver}
       onTouchStart={this.onMouseOver}
       onMouseOut={this.onMouseOut}
       onTouchEnd={this.onMouseOut}
-    />)
+    />;
   }
 }
 
 class Blocks extends Component {
+
   render() {
-    const rectW = this.props.rectW;
-    const dayItems = this.props.data.map((item) =>
-      (<Rect
-        x={(getWeek(item.date) - 1) * rectW}
-        y={moment(item.date, 'M/D/YYYY').day() * rectW}
-        width={rectW}
-        height={rectW}
-        key={item.date}
-        id={item.date}
-        value={item.value}
-        rectHovered={this.props.rectHovered}
-      />)
-    );
-    const weekData = _.map(this.props.calendar.byUnit.week, function (v, k) {
-      return [k, v];
-    });
-    const weekItems = weekData.map((item) =>
-      (<Line
-        x={+item[0] * rectW + rectW / 2}
-        y={+item[0] === 0 ? moment(this.props.year, 'YYYY').day() * rectW : 0}
-        width={rectW}
-        y2={rectW * (+item[0] === this.props.calendar.total.week ? moment(this.props.year + 1, 'YYYY').add(-1, 'days').day() + 1 : 7)}
-        key={+item[0]}
-        id={+item[0]}
-        value={item[1]}
-        rectHovered={this.props.rectHovered}
-      />)
-    );
-    const monthData = _.map(this.props.calendar.byUnit.month, function (v, k) {
-      return [k, v];
-    });
-    const monthItems = monthData.map((item, i) => {
-      const path = getAreaPath(this.props.rectW, this.props.h, this.props.margin, this.props.year, item[0]);
-      const points = getPoints(this.props.rectW, this.props.h, this.props.margin, this.props.year, item[0]);
-      return  (<Path
-        d={path}
-        x={points.x + points.diff}
-        y="0"
-        key={+item[0]}
-        id={+item[0]}
-        value={item[1]}
-        rectHovered={this.props.rectHovered}
-      />);
-      }
-    );
-    const m = this.props.margin;
+    const {rectW, data, rectHovered, calendar, year, h, margin, unit, brewer} = this.props;
+    const {steps} = calendar.range[unit];
+    const dataByUnit = ['week', 'month'].map(unit => Object.entries(calendar.byUnit[unit]).map(d => [+d[0], d[1]]));
+    const svgByUnit = {
+      day: data.map(item =>
+        <Rect
+          key={item.date}
+          id={item.date}
+          value={item.value}
+          rectHovered={rectHovered}
+          x={(getWeek(item.date) - 1) * rectW}
+          y={moment(item.date, 'M/D/YYYY').day() * rectW}
+          width={rectW}
+          height={rectW}
+          fill={getBlockColor(brewer, steps, item.value)}
+        />),
+      week: dataByUnit[0].map(item =>
+        <Line
+          key={item[0]}
+          id={item[0]}
+          value={item[1]}
+          rectHovered={rectHovered}
+          x={item[0] * rectW + rectW / 2}
+          y={item[0] === 0 ? moment(year, 'YYYY').day() * rectW : 0}
+          y2={rectW * (item[0] === calendar.total.week ? moment(year + 1, 'YYYY').add(-1, 'days').day() + 1 : 7)}
+          stroke={getBlockColor(brewer, steps, item[1])}
+          strokeWidth={rectW}
+        />),
+      month: dataByUnit[1].map((item, i) => {
+        const path = getAreaPath(rectW, h, margin, year, item[0]);
+        const points = getPoints(rectW, h, margin, year, item[0]);
+        return  (<Path
+          key={item[0]}
+          id={item[0]}
+          value={item[1]}
+          rectHovered={rectHovered}
+          x={points.x + points.diff}
+          y={0}
+          d={path}
+          fill={getBlockColor(brewer, steps, item[1])}
+        />);
+      }),
+    };
+
     return (
-      <g transform={`translate(${m.left}, ${m.legend + m.top})`}>
-        <g className={this.props.unit === 'day' ? 'show' : 'hide'}>{dayItems}</g>
-        <g className={this.props.unit === 'week' ? 'show' : 'hide'}>{weekItems}</g>
-        <g className={this.props.unit === 'month' ? 'show' : 'hide'}>{monthItems}</g>
+      <g transform={`translate(${margin.left}, ${margin.legend + margin.top})`}>
+        {svgByUnit[unit]}
       </g>
     );
   }

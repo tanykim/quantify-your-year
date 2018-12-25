@@ -1,4 +1,3 @@
-// import less from 'less';
 import chroma from 'chroma-js';
 
 const colors = {
@@ -8,32 +7,41 @@ const colors = {
   teal: ['lightyellow', 'turquoise', 'Teal'],
   purple: ['lightyellow', 'coral', 'mediumvioletred', 'purple'],
   brown: ['lightyellow', 'LightSalmon', 'darkOrange', 'Brown']
+};
+
+
+const getRandomColor = () => {
+  const themes = Object.keys(colors);
+  const random = Math.floor(Math.random() * themes.length);
+  return themes[random];
 }
 
-var brewer;
-var steps;
-var distance;
-var maxColor;
-
-function getColorRange(s, d, c) {
-  steps = s;
-  distance = d;
-  brewer = chroma.bezier(colors[c]).scale().domain(s);
-  maxColor = colors[c][colors[c].length - 1];
+const getColorBrewer = (setting, color) => {
+  const {steps, distance} = setting;
+  const brewer = chroma.bezier(colors[color]).scale().domain(steps);
+  return steps.map(step => brewer(step + distance / 2));
 }
 
-function getFillColor(val) {
-  let rounded = val;
-  for (var i = 0; i < steps.length - 1; i++) {
-    if (val - steps[i] < distance) {
-      rounded = steps[i] + distance / 2
-      break;
+const getBlockColor = (brewer, steps, value) => {
+  // out of legend boundary
+  let color;
+  if (value > steps[steps.length - 1] || value < steps[0]) {
+    color === 'grey';
+  } else {
+    let index = 0;
+    for (let i = 1; i < steps.length; i++) {
+      if (value < steps[i]) {
+        index = i - 1;
+        break;
+      }
     }
+    color = brewer[index]
   }
-  return brewer(rounded);
+  return color;
 }
 
-function getMaxColor() {
-  return maxColor;
+const getMaxColor = (c) => {
+  return colors[c][colors[c].length - 1];
 }
-export { colors, getColorRange, getFillColor, getMaxColor };
+
+export {colors, getRandomColor, getColorBrewer, getBlockColor, getMaxColor};

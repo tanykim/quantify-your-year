@@ -1,69 +1,33 @@
-import React, { Component } from 'react';
-import _ from 'underscore';
+import React, {Component} from 'react';
 import Menu from './components/Menu';
 import Summary from './components/Summary';
-import Legend from './components/vis/Legend';
-import Visualization from './components/Visualization';
-import Max from './components/Max';
-import Stats from './components/Stats';
+import Main from './components/Main';
 import ByDay from './components/ByDay';
-import { getSum, getAverages, getCalendar, getStatsByUnit, getDataByDay } from './processors/analysis';
-import { getDimensions } from './processors/dimensions';
-import { capitalize } from './processors/formats';
-import { colors } from './processors/colors';
-import { Icon } from 'react-fa';
+import {capitalize} from './processors/formats';
+import {getRandomColor} from './processors/colors';
+import {getVisDimensions} from './processors/dimensions';
+
+import {Icon} from 'react-fa';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
+    this.state = {
+      menuOpen: false,
+      isScrolled: false,
+    };
+
     this.handleScroll = this.handleScroll.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
-  componentWillMount() {
-    this.updateStates(this.props.params.dataId);
+  componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.params.dataId !== prevProps.params.dataId) {
-      this.updateStates(this.props.params.dataId);
-    }
-  }
-
-  updateStates(url) {
-    const dataId = url || 'tanyofish-swimming-2017';
-    const setting = require(`./settings/${dataId}.json`);
-    const data = require(`./data/${dataId}.json`);
-    const year = setting.year;
-    setting.abbr = setting.abbr || ` ${setting.metric}s`;
-    this.setState({
-      setting: setting,
-      color: setting.color || _.sample(_.keys(colors)),
-      data: data,
-      unit: 'day',
-      sum: getSum(data),
-      averages: getAverages(data, year),
-      dims: getDimensions(year),
-      calendar: getCalendar(data, year),
-      stats: setting.considerFrequency ? getStatsByUnit(data, year) : null,
-      byDay: getDataByDay(data),
-      menuOpen: false,
-      dataId: dataId
-    });
-  }
-
-  handleScroll(event) {
-    if (event.srcElement.body.scrollTop > 180) {
-      this.setState({isScrolled: true});
-    } else {
-      this.setState({isScrolled: false});
-    }
-  }
-
-  onChange(e) {
-    this.setState({unit: e.target.value});
+  handleScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    this.setState({isScrolled: scrollTop > 180});
   }
 
   toggleMenu(willClose) {
@@ -71,81 +35,49 @@ class App extends Component {
   }
 
   render() {
-    const s = this.state.setting;
+    // get data id from url
+    const dataId = this.props.params.dataId || 'tanyofish-swimming-2017';
+    const setting = require(`./settings/${dataId}.json`);
+    const data = require(`./data/${dataId}.json`);
+    let {author, topic, year, color, abbr} = setting;
+    if (color === undefined) {
+      color = getRandomColor();
+      setting.color = color;
+    }
+    if (abbr === undefined) {
+      abbr = ' ' + setting.metric + 's';
+      setting.abbr = abbr;
+    }
+    const dims = getVisDimensions(year);
     return (
-      <div className={this.state.color}>
+      <div className={color}>
         <div className={this.state.isScrolled ? 'header-fixed' : 'header'}>
-            <div className="author">{capitalize(s.author)}'s</div>
-            <div className="topic">{capitalize(s.topic)} in {s.year}</div>
+            <div className="author">{capitalize(author)}'s</div>
+            <div className="topic">{capitalize(topic)} in {year}</div>
             <div className="menu">
               <Icon name="bars" size="2x" onClick={this.toggleMenu} className="hidden-md hidden-lg menu-icon"/>
               <div onClick={this.toggleMenu} className="visible-md-block visible-lg-block menu-text">
                 Datasets <Icon name={`chevron-${this.state.menuOpen? 'up' : 'down'}`} onClick={this.toggleMenu} className="menu-icon"/>
               </div>
               <div className={this.state.menuOpen ? 'menu-content show' : 'menu-content hide'}>
-                <Menu close={this.toggleMenu} url={this.state.dataId}/>
+                <Menu close={this.toggleMenu} url={dataId}/>
               </div>
             </div>
         </div>
-        <div className="row">
-          <Summary
-            {...s}
-            sum={this.state.sum}
-            averages={this.state.averages}/>
-        </div>
-        <div className="row unit-selection">
-          <div className="col-xs-12 col-md-6">
-            <span className="input">
-              <input type="radio" name="unit" checked={this.state.unit === 'day'} onChange={this.onChange} value="day"/>
-              Day
-            </span>
-            <span className="input">
-              <input type="radio" name="unit" checked={this.state.unit === 'week'} onChange={this.onChange} value="week" />
-              Week
-            </span>
-            <span className="input">
-              <input type="radio" name="unit" checked={this.state.unit === 'month'} onChange={this.onChange} value="month" />Month
-            </span>
-          </div>
-          <div className="col-xs-12 col-md-6">
-            <Legend
-              containerW={this.state.dims.containerW}
-              rectW={this.state.dims.rectW}
-              marginRight={this.state.dims.margin.right}
-              range={this.state.calendar.range}
-              unit={this.state.unit}
-              color={this.state.color}
-            />
-          </div>
-          <div className="col-xs-12 visible-xs-block visible-sm-block slider">
-            <Icon name="arrow-circle-left" /> Slide calender <Icon name="arrow-circle-right" />
-          </div>
-          <Visualization
-            data={this.state.data}
-            year={s.year}
-            color={this.state.color}
-            unit={this.state.unit}
-            dims={this.state.dims}
-            abbr={s.abbr}
-            calendar={this.state.calendar} />
-          <Max
-            {...s}
-            unit={this.state.unit}
-            calendar={this.state.calendar}/>
-          {s.considerFrequency &&
-            <Stats
-              unit={this.state.unit}
-              {...s}
-              stats={this.state.stats} />
-          }
-        </div>
+        <Summary
+          {...setting}
+          data={data}
+        />
+        <Main
+          setting={setting}
+          dims={dims}
+          data={data}
+        />
         <ByDay
-          showRadio={s.considerFrequency}
-          data={this.state.byDay}
-          topic={s.topic}
-          metric={s.metric}
-          abbr={s.abbr}
-          dims={this.state.dims} />
+          {...setting}
+          dims={dims}
+          data={data}
+        />
         <div className="row">
           <div className="col-xs-12 footer">
             <span className="link">Share
@@ -161,15 +93,16 @@ class App extends Component {
                 <Icon name="github" />
               </a>
             </span>
-            {s.dataSource &&
+            {setting.dataSource &&
               <span className="link">Powered by
-                <a href={s.dataSource.url} target="_blank">
-                  {s.dataSource.name}
+                <a href={setting.dataSource.url} target="_blank">
+                  {setting.dataSource.name}
                 </a>
               </span>
             }
           </div>
         </div>
+
       </div>
     );
   }

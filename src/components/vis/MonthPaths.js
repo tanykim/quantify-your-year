@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import _ from 'underscore';
-import { getPoints, getPath } from './../../processors/dimensions';
+import {getPoints, getPath} from './../../processors/dimensions';
 
 class MonthPaths extends Component {
   render() {
-    const props = this.props;
-    const path = _.range(12).map((month) =>
-      (<path className="month-path"
-        d={getPath(props, month)}
+    const {rectW, h, margin, year} = this.props;
+
+    const path = [...Array(12).keys()].map(month =>
+      <path className="month-path"
+        d={getPath(this.props, month)}
         key={month}
-      />)
+      />
     );
-    const text = _.map(_.range(12), function (month) {
-      const p = getPoints(props.rectW, props.h, props.margin, props.year, month);
+
+    const text = [...Array(12).keys()].map(month => {
+      const p = getPoints(rectW, h, margin, year, month);
       return (
         <text
           key={month}
@@ -25,10 +26,9 @@ class MonthPaths extends Component {
         </text>
       );
     });
-    const m = props.margin;
 
     return (
-      <g transform={`translate(${m.left}, ${m.legend + m.top})`}>
+      <g transform={`translate(${margin.left}, ${margin.legend + margin.top})`}>
         {path}
         {text}
       </g>

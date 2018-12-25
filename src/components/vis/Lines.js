@@ -1,43 +1,39 @@
 import React, { Component } from 'react';
-import _ from 'underscore';
 
 class HorizontalLines extends Component {
   render() {
-    const w = this.props.rectW;
-    const lines = _.range(8).map((day) =>
-      (<line className="lines"
-        x1={this.props.startDay > day ? w : 0}
-        x2={this.props.w - (this.props.endDay + 1 < day ? w : 0)}
+    const {startDay, endDay, margin, rectW} = this.props;
+    const w = rectW;
+    const lines = [...Array(8).keys()].map(day =>
+      <line className="lines"
+        x1={startDay > day ? w : 0}
+        x2={this.props.w - (endDay + 1 < day ? w : 0)}
         y1={day * w}
         y2={day * w}
-        stroke="black"
         key={day}
-      />)
+      />
     );
-    const m = this.props.margin;
-
     return (
-      <g transform={`translate(${m.left}, ${m.legend + m.top})`} className={this.props.unit === 'day' ? 'show' : 'hide'}>{lines}</g>
+      <g transform={`translate(${margin.left}, ${margin.legend + margin.top})`}>{lines}</g>
     );
   }
 }
 
 class VerticalLines extends Component {
   render() {
-    const w = this.props.rectW;
-    const lines = _.range(this.props.noOfWeeks + 1).map((week) =>
+    const {noOfWeeks, startDay, endDay, h, margin, rectW} = this.props;
+    const w = rectW;
+    const lines = [...Array(noOfWeeks + 1).keys()].map((week) =>
       (<line className="lines"
         x1={week * w}
         x2={week * w}
-        y1={week === 0 ? this.props.startDay * w : 0}
-        y2={week === this.props.noOfWeeks ? (this.props.endDay + 1) * w : this.props.h}
+        y1={week === 0 ? startDay * w : 0}
+        y2={week === noOfWeeks ? (endDay + 1) * w : h}
         key={week}
       />)
     );
-    const m = this.props.margin;
-
     return (
-      <g transform={`translate(${m.left}, ${m.legend + m.top})`} className={this.props.unit !== 'month' ? 'show' : 'hide'}>{lines}</g>
+      <g transform={`translate(${margin.left}, ${margin.legend + margin.top})`}>{lines}</g>
     );
   }
 }

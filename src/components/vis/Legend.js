@@ -1,34 +1,29 @@
-import React, { Component } from 'react';
-import _ from 'underscore';
-import { getColorRange, getFillColor } from './../../processors/colors';
-import { prefix } from './../../processors/formats';
+import React, {Component} from 'react';
+import {prefix} from './../../processors/formats';
 
 class Legend extends Component {
   render() {
-    const steps = this.props.range[this.props.unit].steps;
-    const distance = this.props.range[this.props.unit].distance;
-    const maxRectW = (this.props.containerW - this.props.marginRight * 2) / (steps.length - 1);
-    const rectW = Math.min(maxRectW, this.props.rectW * 2)
-    const rectH = this.props.rectW;
+    const {brewer, containerW, rectW, marginRight, steps} = this.props;
+    const maxRectW = (containerW - marginRight * 2) / (steps.length - 1);
+    const width = Math.min(maxRectW, rectW * 2);
+    const height = rectW;
 
-    getColorRange(steps, distance, this.props.color);
-
-    const blocks = _.range(steps.length - 1).map((i) =>
+    const blocks = [...Array(steps.length - 1).keys()].map((i) =>
       (<div className="block"
         key={i}
-        style={{backgroundColor: getFillColor(steps[i]), width: rectW, height: rectH}}
+        style={{backgroundColor: brewer[i], width, height}}
       />)
     );
 
     const labels = steps.map((step, i) =>
-      (<div className="label" key={i} style={{width: rectW}}>
+      (<div className="label" key={i} style={{width}}>
         {prefix(step)}
       </div>)
     );
 
     return (
       <div className="legend">
-        <div style={{padding: `0 ${this.props.marginRight}px`}}>{blocks}</div>
+        <div style={{padding: `0 ${marginRight}px`}}>{blocks}</div>
         <div>{labels}</div>
       </div>
     );

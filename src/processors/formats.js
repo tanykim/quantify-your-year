@@ -1,14 +1,13 @@
 import * as d3 from 'd3-format';
 import moment from 'moment';
-import _ from 'underscore';
 
 //abc -> Abc
-function capitalize(str) {
+const capitalize = (str) => {
   return str[0].charAt(0).toUpperCase() + str.slice(1);
 }
 
 //e.g., 1200 unit -> 1,200 units
-function pluralize(n, unit, total) {
+const pluralize = (n, unit, total) => {
   if (n === total) {
     return `every ${unit}`;
   } else {
@@ -16,12 +15,12 @@ function pluralize(n, unit, total) {
   }
 }
 
-function locale(n) {
+const locale = (n) => {
   return Math.round(n).toLocaleString();
 }
 
 //add SI prefix - k, M...
-function prefix(n) {
+const prefix = (n) => {
   if (n === 0) {
     return 0;
   } else if (n >= 0.0001 && n < 10000) {
@@ -31,11 +30,11 @@ function prefix(n) {
   }
 }
 
-function getMomentDay(year, unit, id) {
+const getMomentDay = (year, unit, id) => {
   return moment(year, 'YYYY').add(id, `${unit}s`);
 }
 
-function getDurationAcrossMonth(sd, ed, isDay) {
+const getDurationAcrossMonth = (sd, ed, isDay) => {
   //start day format
   let sf = 'MMMM D';
   //end day format
@@ -49,8 +48,8 @@ function getDurationAcrossMonth(sd, ed, isDay) {
   return `${sd.format(sf)} - ${ed.format(ef)}`;
 }
 
-function humanizeUnitId(year, unit, id) {
-  const d = _.isNull(year) ? moment(id, 'M/D/YYYY') : getMomentDay(year, unit, id);
+const humanizeUnitId = (year, unit, id) => {
+  const d = year != null ? getMomentDay(year, unit, id) : moment(id, 'M/D/YYYY');
   if (unit === 'day') {
     return d.format('ddd MMM D');
   } else if (unit === 'week') {
@@ -62,7 +61,7 @@ function humanizeUnitId(year, unit, id) {
   }
 }
 
-function humanizeDuration(year, unit, id, count) {
+const humanizeDuration = (year, unit, id, count) => {
   if (count === 1) {
     return humanizeUnitId(year, unit, id);
   }
@@ -91,7 +90,7 @@ function humanizeDuration(year, unit, id, count) {
   return finalStr;
 }
 
-function pronoun(gender, isHead) {
+const pronoun = (gender, isHead) => {
   let pn = 'xe';
   if (gender === 'female') {
     pn = 'she';

@@ -18,7 +18,7 @@ class Menu extends Component {
       const elms = d.data.map((elm, j) => {
         let url = `${elm.author}-${elm.topic.replace(/ /g, '-')}-${d.year}`;
         url = url.toLowerCase();
-        return (<li key={j} className={url === this.props.url ? 'text-highlight' : ''}>
+        return (<li key={j} className={url === this.props.url ? 'text-highlight' : ''} onClick={this.hideMenu} >
           <Link to={url}>
             {elm.author}'s {elm.topic}
           </Link>

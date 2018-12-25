@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
-import { pronoun, capitalize, pluralize } from './../processors/formats';
+import {getSum, getAverages} from './../processors/analysis';
+import {pronoun, capitalize, pluralize} from './../processors/formats';
 
 class Summary extends Component {
   render() {
+    const {data, author, pastVerb, year, type, metric, considerFrequency, gender, abbr} = this.props;
+    const sum = getSum(data);
+    const averages = getAverages(sum, data.length, year);
+
     return (
-      <div className="col-xs-12 summary">
-        {capitalize(this.props.author)} {this.props.pastVerb}
-        {this.props.type === 'duration' ? ` for ` : ` total `}
-        <i>{pluralize(this.props.sum, this.props.metric)}</i>:
-        {` `}in average <ii>{pluralize(this.props.averages.day, this.props.metric)}</ii>
-        {` `}per {this.props.considerFrequency ? ` an active` : `a` } day.
-        <br />
-        {` `}Over the whole year, {pronoun(this.props.gender, false)} {this.props.pastVerb}
-        {` `}<ii>{this.props.averages.week}<l>{this.props.abbr}/week</l></ii>, and
-        {` `}<ii>{this.props.averages.month}<l>{this.props.abbr}/month</l></ii>.
+      <div className="row">
+        <div className="col-xs-12 summary">
+          {capitalize(author)} {pastVerb}
+          {type === 'duration' ? ` for ` : ` total `}
+          <i>{pluralize(sum, metric)}</i>:
+          {` `}in average <ii>{pluralize(averages.day, metric)}</ii>
+          {` `}per {considerFrequency ? ` an active` : `a` } day.
+          <br />
+          {` `}Over the whole year, {pronoun(gender, false)} {pastVerb}
+          {` `}<ii>{averages.week}<l>{abbr}/week</l></ii>, and
+          {` `}<ii>{averages.month}<l>{abbr}/month</l></ii>.
+        </div>
       </div>
     );
   }

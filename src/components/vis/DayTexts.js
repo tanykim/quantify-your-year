@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import _ from 'underscore';
 
 class DayTexts extends Component {
   render() {
-    const text = _.range(7).map((day) =>
+    const text = [...Array(7).keys()].map((day) =>
       (<text
         key={day}
         x="-9"
