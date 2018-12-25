@@ -12,8 +12,7 @@
     "react-fa": "^4.2.0",
     "react-render-html": "^0.1.6",
     "react-router": "^3.2.0",
-    "react-scripts": "^1.0.17",
-    "underscore": "^1.8.3"
+    "react-scripts": "^1.0.17"
   },
   "scripts": {
     "start": "react-scripts start",
