@@ -104,15 +104,27 @@ const getValueRange = (min, max) => {
   return {min, max, steps, distance};
 }
 
-const getQuterFence = (data) => {
+const getFence = (data) => {
   const sorted = data.sort((a, b) => a - b);
   const lowerQIdx = Math.round(data.length / 4);
   const upperQIdx = Math.round(data.length / 4 * 3);
   const interQRange = sorted[upperQIdx] - sorted[lowerQIdx];
-  return [
+  const innerFence = [
+    sorted[lowerQIdx] - interQRange * 1.5,
+    sorted[upperQIdx] + interQRange * 1.5,
+  ];
+  const outerFence = [
     sorted[lowerQIdx] - interQRange * 3,
     sorted[upperQIdx] + interQRange * 3,
   ];
+  const outOfInnerFence = data.filter(d => d < outerFence[0] || d > innerFence[1]);
+  const outOfOuterFence = data.filter(d => d < innerFence[0] || d > outerFence[1]);
+  // do not make too many outliers
+  if (outOfInnerFence.length < Math.sqrt(data.length / 20)) {
+    return innerFence;
+  } else {
+    return outerFence;
+  }
 }
 
 const getCalendar = (data, year) => {
@@ -139,7 +151,7 @@ const getCalendar = (data, year) => {
     maxByUnit[unit] = {val: maxVal, list: unitWithMax};
 
     // get ranges that excludes outliers
-    const outerFence = getQuterFence(byUnitArray[i]);
+    const outerFence = getFence(byUnitArray[i]);
     rangeByUnit[unit] = getValueRange(
       Math.max(minVal, outerFence[0]),
       Math.min(maxVal, outerFence[1]),
