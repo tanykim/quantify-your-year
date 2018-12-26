@@ -74,7 +74,7 @@ const getAreaPath = (rectW, h, margin, year, month) => {
     // December has 31 days, 31 % 7 = 3
     const nysd = (sp.startDay + 3) % 7;
     // if the new year's first day is Sunday or Monday, diff should be rectW
-    const nyw = sp.startWeek + (nysd <= 1 ? 5 : 4);
+    const nyw = sp.startWeek + (sp.startDay >= 4 ? 5 : 4);
     np = getPoints(rectW, h, margin, year, null, nysd, nyw);
   }
   return `M ${sp.x}, ${h} V ${sp.y} h ${sp.diff} V 0 H ${np.x} h ${np.diff} V ${np.y} h ${-np.diff} V ${h} Z`;

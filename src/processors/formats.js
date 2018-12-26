@@ -15,8 +15,9 @@ const pluralize = (n, unit, total) => {
   }
 }
 
-const locale = (n) => {
-  return Math.round(n).toLocaleString();
+const locale = (n, decimal) => {
+  const pow = decimal + 1 || 1;
+  return (Math.round(n * Math.pow(10, pow)) / Math.pow(10, pow)).toLocaleString();
 }
 
 //add SI prefix - k, M...

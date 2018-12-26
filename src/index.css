@@ -91,7 +91,6 @@ body {
   display: inline;
 }
 .header {
-  padding-top: 24px;
   padding-bottom: 36px;
   position: relative;
 }
@@ -109,6 +108,7 @@ body {
   text-align: center;
   width: 100%;
   left: 0;
+  top: 0;
   z-index: 1000;
   padding-top: 12px;
   padding-bottom: 12px;
@@ -126,7 +126,7 @@ body {
   margin-right: 8px;
 }
 .menu {
-  position: absolute;
+  position: relative;
   top: 0;
   right: 0;
   padding-top: 24px;

@@ -12,7 +12,7 @@ class Block extends Component {
   }
   onMouseOver(e) {
     e.preventDefault()
-    this.props.rectHovered(true, this.props.x, this.props.y, this.props.id, this.props.value);
+    this.props.rectHovered(true, this.props.x, this.props.y, this.props.id, this.props.value, this.props.altValue);
   }
   onMouseOut(e) {
     e.preventDefault()
@@ -74,6 +74,7 @@ class Blocks extends Component {
           key={item.date}
           id={item.date}
           value={item.value}
+          altValue={item.altValue}
           rectHovered={rectHovered}
           x={(getWeek(item.date) - 1) * rectW}
           y={moment(item.date, 'M/D/YYYY').day() * rectW}

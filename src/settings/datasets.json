@@ -1,5 +1,21 @@
 [
   {
+    "year": 2018,
+    "data": [
+      {
+        "author": "tanyofish",
+        "topic": "swimming"
+      },
+      {
+        "author": "tanyofish",
+        "topic": "twitter"
+      },
+      {
+        "author": "tanyoung",
+        "topic": "time at home"
+      }
+    ]
+  },  {
     "year": 2017,
     "data": [
       {

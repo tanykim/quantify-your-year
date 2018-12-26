@@ -13,12 +13,12 @@ class Calendar extends Component {
     this.state = {isHovered: false};
   }
 
-  rectHovered(isHovered, x, y, id, val) {
-    this.setState({isHovered, x, y, id, val});
+  rectHovered(isHovered, x, y, id, val, altVal) {
+    this.setState({isHovered, x, y, id, val, altVal});
   }
 
   render() {
-    const {data, year, brewer, unit, dims, calendar, abbr} = this.props;
+    const {data, year, brewer, unit, dims, calendar, abbr, altAbbr} = this.props;
     const calInfo = getCalendarInfo(year);
     const {rectW, w, h, margin} = dims;
     return (
@@ -46,6 +46,7 @@ class Calendar extends Component {
             unit={unit}
             year={year}
             abbr={abbr}
+            altAbbr={altAbbr}
             margin={margin}
             rectW={rectW}
             w={w}

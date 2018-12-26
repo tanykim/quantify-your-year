@@ -25,8 +25,10 @@ const getColorBrewer = (setting, color) => {
 const getBlockColor = (brewer, steps, value) => {
   // out of legend boundary
   let color;
-  if (value > steps[steps.length - 1] || value < steps[0]) {
-    color === 'grey';
+  if (value > steps[steps.length - 1]) {
+    color = 'black';
+  } else if (value < steps[0]) {
+    color = '#ced4da';
   } else {
     let index = 0;
     for (let i = 1; i < steps.length; i++) {

@@ -17,19 +17,26 @@ The setting file contains following information. For example,
   "topic": "swimming",
   "pastVerb": "swam",
   "type": "distance",
+  "considerFrequency": true,
   "metric": "yard",
   "abbr": "yd",
-  "considerFrequency": true
-  "color": "blue"
+  "color": "blue",
+  "alt_unit": "meter",
+  "conversion": 1.09361,
+  "alt_abbr": "m",
+  "decimal": 1
 }
 ```
 * Gender: gender of the person, choose from female, male, and other
 * Past Verb: a past tense verb matching the activity topic
-* type: Measurement of the activity, e.g., duration, distance, steps
+* Type: Measurement of the activity, e.g., duration, distance, steps
 * Metric: Unit of the type, use singular form. e.g., minute, meter, step,
-* Abbr: Same as metric if no abbreviation is common. e.g., m, yd, km
+* Abbribiation (optional): Same as metric if no abbreviation is common. e.g., m, yd, km
 * Consider Frequency: False if most of the days have data so the number of days with valid data does not give insights.
-* Color: Choose the highlight color from blue, red, teal, green, purple. If not configured, one color is randomly selected.
+* Color (optional): Choose the highlight color from blue, red, teal, green, purple. If not configured, one color is randomly selected.
+* Alternative Unit (optional): Specify an alternative unit if it exists.
+* Alternative Abbribiation (optional)
+* Decimal (optional): If the data values contain decimal number, specify.
 
 If the frequency matters (e.g., one may not swim every day), this project provides further analysis including consecutive days/week/month.
 

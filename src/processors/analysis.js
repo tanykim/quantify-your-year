@@ -1,6 +1,27 @@
 import moment from 'moment';
 import { locale, humanizeUnitId, humanizeDuration } from './formats';
 
+const getConvertedData = (data, conversion, decimal) => {
+  let newData = [];
+  for (let d of data) {
+    let {date, value, alt_unit} = d;
+    const newVal = {date, value};
+    if (alt_unit != null) {
+      newVal.altValue = value;
+      let converted = value * conversion;
+      if (decimal != null) {
+        converted = Math.round(converted * Math.pow(10, decimal)) / Math.pow(10, decimal);
+      } else {
+        converted = Math.round(converted);
+      }
+      newVal.value = converted;
+
+    }
+    newData.push(newVal);
+  }
+  return newData
+}
+
 const arrToObj = (arr) => {
   return arr.reduce((obj, pair) => {
       obj[pair[0]] = pair[1];
@@ -118,7 +139,6 @@ const getFence = (data) => {
     sorted[upperQIdx] + interQRange * 3,
   ];
   const outOfInnerFence = data.filter(d => d < outerFence[0] || d > innerFence[1]);
-  const outOfOuterFence = data.filter(d => d < innerFence[0] || d > outerFence[1]);
   // do not make too many outliers
   if (outOfInnerFence.length < Math.sqrt(data.length / 20)) {
     return innerFence;
@@ -225,4 +245,4 @@ const getDataByDay = (data) => {
   });
 }
 
-export { getSum, getAverages, getWeek, getCalendar, getStatsByUnit, getDataByDay };
+export {getConvertedData, getSum, getAverages, getWeek, getCalendar, getStatsByUnit, getDataByDay};

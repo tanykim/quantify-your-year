@@ -6,6 +6,7 @@ import ByDay from './components/ByDay';
 import {capitalize} from './processors/formats';
 import {getRandomColor} from './processors/colors';
 import {getVisDimensions} from './processors/dimensions';
+import {getConvertedData} from './processors/analysis';
 
 import {Icon} from 'react-fa';
 
@@ -38,8 +39,12 @@ class App extends Component {
     // get data id from url
     const dataId = this.props.params.dataId || 'tanyofish-swimming-2017';
     const setting = require(`./settings/${dataId}.json`);
-    const data = require(`./data/${dataId}.json`);
-    let {author, topic, year, color, abbr} = setting;
+    let data = require(`./data/${dataId}.json`);
+    let {author, topic, year, color, abbr, alt_unit, conversion, decimal} = setting;
+    // if alternaitve unit exists
+    if (alt_unit != null) {
+      data = getConvertedData(data, conversion, decimal);
+    }
     if (color === undefined) {
       color = getRandomColor();
       setting.color = color;
@@ -51,18 +56,18 @@ class App extends Component {
     const dims = getVisDimensions(year);
     return (
       <div className={color}>
+        <div className="menu">
+          <Icon name="bars" size="2x" onClick={this.toggleMenu} className="hidden-md hidden-lg menu-icon"/>
+          <div onClick={this.toggleMenu} className="visible-md-block visible-lg-block menu-text">
+            Datasets <Icon name={`chevron-${this.state.menuOpen? 'up' : 'down'}`} onClick={this.toggleMenu} className="menu-icon"/>
+          </div>
+          <div className={this.state.menuOpen ? 'menu-content show' : 'menu-content hide'}>
+            <Menu close={this.toggleMenu} url={dataId}/>
+          </div>
+        </div>
         <div className={this.state.isScrolled ? 'header-fixed' : 'header'}>
             <div className="author">{capitalize(author)}'s</div>
             <div className="topic">{capitalize(topic)} in {year}</div>
-            <div className="menu">
-              <Icon name="bars" size="2x" onClick={this.toggleMenu} className="hidden-md hidden-lg menu-icon"/>
-              <div onClick={this.toggleMenu} className="visible-md-block visible-lg-block menu-text">
-                Datasets <Icon name={`chevron-${this.state.menuOpen? 'up' : 'down'}`} onClick={this.toggleMenu} className="menu-icon"/>
-              </div>
-              <div className={this.state.menuOpen ? 'menu-content show' : 'menu-content hide'}>
-                <Menu close={this.toggleMenu} url={dataId}/>
-              </div>
-            </div>
         </div>
         <Summary
           {...setting}

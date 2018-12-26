@@ -22,7 +22,7 @@ class Visualization extends Component {
 
   render() {
     const {setting, data, dims} = this.props;
-    const {year, color, abbr} = setting;
+    const {year, color, abbr, alt_abbr} = setting;
     const {unit} = this.state;
     const calendar = getCalendar(data, year);
     const brewer = getColorBrewer(calendar.range[unit], color);
@@ -62,6 +62,7 @@ class Visualization extends Component {
           unit={unit}
           dims={dims}
           abbr={abbr}
+          altAbbr={alt_abbr}
           calendar={calendar} />
         <Max
           {...setting}

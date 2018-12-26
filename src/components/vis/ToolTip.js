@@ -36,7 +36,7 @@ class ToolTip extends Component {
   }
 
   render() {
-    let {year, unit, id, val, abbr} = this.props;
+    let {year, unit, id, val, abbr, decimal, altVal, altAbbr} = this.props;
     year = unit === 'day' ? null : year;
     const {x, y, textX, textY, path} = this.state;
     return (
@@ -48,7 +48,10 @@ class ToolTip extends Component {
           id="tt-label"
         >
           <tspan x={textX} dy="14">{humanizeUnitId(year, unit, id)}</tspan>
-          <tspan x={textX} dy="20">{locale(val)}{abbr}</tspan>
+          <tspan x={textX} dy="20">
+            {locale(val, decimal)}{abbr}
+            {altVal != null && ` (${locale(altVal, decimal)}${altAbbr})`}
+          </tspan>
         </text>
       </g>
     );
