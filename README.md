@@ -60,6 +60,10 @@ Save this file as ```[AUTHOR]-[ACTIVITY_TOPIC]-[YEAR].json``` under ```src/data`
 
 If you log your data on Google Spreadsheet, try this convenient [converter](https://www.npmjs.com/package/google-spreadsheet-to-json).
 
+If you want to trace your time spent at a single location exploiting Google's location history data, check out [this repo](https://github.com/tanykim/google-map-tracer).
+
+If you want to count your tweets per day, check out [this repo](https://github.com/tanykim/tweet-counter).
+
 ## Development
 ```
 npm install

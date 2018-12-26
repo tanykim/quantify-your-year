@@ -1,0 +1,10 @@
+{
+  "year": 2018,
+  "author": "JJ",
+  "gender": "female",
+  "topic": "calories burned",
+  "pastVerb": "burned",
+  "type": "calorie",
+  "metric": "kcal",
+  "considerFrequency": true
+}

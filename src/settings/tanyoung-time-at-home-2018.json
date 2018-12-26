@@ -1,0 +1,16 @@
+{
+  "year": 2018,
+  "author": "tanyoung",
+  "gender": "female",
+  "topic": "time at home",
+  "pastVerb": "stayed home",
+  "type": "duration",
+  "metric": "hour",
+  "dataSource": {
+    "name": "Google Maps",
+    "url": "https://www.google.com/maps/timeline"
+  },
+  "decimal": 1,
+  "color": "purple",
+  "considerFrequency": false
+}

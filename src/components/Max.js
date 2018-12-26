@@ -5,9 +5,21 @@ class Max extends Component {
   render() {
     const {unit, calendar, author, type, metric} = this.props;
     const max = calendar.max[unit];
-    const maxActiveList = max.list.map((item, i) =>
-      <span key={i}>{i < max.list.length - 1 ? `${item},` : item}</span>
-    );
+    const maxActiveList = max.list.map((item, i) => {
+      let display = item;
+      const count = max.list.length;
+      if (i > 0 && i < count - 1) {
+        display += ', ';
+      }
+      if (i > 1 && i === count - 2) {
+        display += 'and ';
+      }
+      let tail = '.';
+      if (i === count - 1 && count > 5) {
+        tail = ` (total ${count}).`
+      }
+      return (<span key={i}>{display}{i === count - 1 ? tail : ''}</span>);
+    });
     const conj = {day: 'on', week: 'during', month: 'in'};
 
     return (

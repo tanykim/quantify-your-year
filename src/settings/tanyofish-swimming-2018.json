@@ -1,0 +1,15 @@
+{
+  "year": 2018,
+  "author": "tanyofish",
+  "gender": "female",
+  "topic": "swimming",
+  "pastVerb": "swam",
+  "type": "distance",
+  "metric": "yard",
+  "alt_unit": "meter",
+  "conversion": 1.09361,
+  "abbr": "yd",
+  "alt_abbr": "m",
+  "considerFrequency": true,
+  "color": "purple"
+}
