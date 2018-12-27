@@ -16,12 +16,12 @@ class ByDay extends Component {
   }
 
   render() {
-    const {topic, considerFrequency, metric, data, color, dims} = this.props;
+    const {topic, considerFrequency, metric, type, data, color, dims} = this.props;
 
     return (
       <div className="row unit-selection">
         <div className="col-xs-12 title">
-          See the {capitalize(topic)} Data by Day
+          See the {capitalize(topic)} Data by Day {!considerFrequency && ` (total ${type} in ${metric})`}
         </div>
         <div className="col-xs-12">
           <div className={considerFrequency ? 'show' : 'hide'}>

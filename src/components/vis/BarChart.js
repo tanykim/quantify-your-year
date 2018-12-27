@@ -1,38 +1,42 @@
 import React, { Component } from 'react';
 import DayTexts from './DayTexts';
-import {getMaxColor} from './../../processors/colors';
+import {getMaxColor, getColorForNegative} from './../../processors/colors';
 import {getDataByDay} from './../../processors/analysis';
 import * as d3 from 'd3';
 
 class Bars extends Component {
   render() {
-    const {dim, sel, xScale, color, data} = this.props;
+    const {dim, xScale, barScale, color, data} = this.props;
 
-    const barList = data.map((day, i) => (
-      <rect
-        x="0"
-        y={i * dim.barH + dim.barH / 8}
-        width={xScale(day[sel])}
-        height={dim.barH / 8 * 6}
-        fill={getMaxColor(color)}
-        key={i}
-        />
-    ));
+    const colorPositive = getMaxColor(color);
+    const colorNevative = getColorForNegative(color);
 
-    const labelList = data.map((day, i) => (
-      <text
-        x={xScale(day[sel]) + 9}
-        y={i * dim.barH + dim.barH / 2}
-        key={i}
-        className="label-text">
-        {day[sel].toLocaleString()}
-      </text>
-    ));
+    const bars = data.map((d, i) => {
+      const width = barScale(Math.abs(d));
+      return (
+        <g key={i}>
+          <rect
+            x={d >= 0 ? xScale(0) : xScale(0) - width}
+            y={i * dim.barH + dim.barH / 8}
+            width={width}
+            height={dim.barH / 8 * 6}
+            fill={d >=0 ? colorPositive : colorNevative}
+          />
+          <text
+            x={xScale(d) + 9}
+            y={i * dim.barH + dim.barH / 2}
+            className="label-text"
+            style={{fill: d < 0 ? 'white' : 'black'}}
+          >
+            {d.toLocaleString()}
+          </text>
+        </g>
+      );
+    });
 
     return (
       <g transform={`translate(${dim.margin.left}, ${dim.margin.top})`}>
-        {barList}
-        {labelList}
+        {bars}
       </g>
     );
   }
@@ -49,7 +53,7 @@ class Axis extends Component {
     d3.select('#axis')
       .call(d3
         .axisBottom(this.props.scale)
-        .tickFormat(d3.format('.1s'))
+        .tickFormat(d3.format('.2s'))
         .tickSize(-this.props.dim.h)
         .tickPadding(9)
         .ticks(8)
@@ -85,7 +89,17 @@ class BarChart extends Component {
 
     const data = getDataByDay(this.props.data);
     const maxVal = Math.max(...data.map((d) => d[selection]));
-    const xScale = d3.scaleLinear().domain([0, maxVal]).range([0, chartDim.w]);
+    const minVal = Math.min(...data.map((d) => d[selection]));
+
+    // for axis
+    const xScale = d3.scaleLinear()
+      .domain([Math.min(minVal, 0), Math.max(maxVal, 0)])
+      .range([0, chartDim.w]);
+
+    // bars across from negative to positive values
+    const barScale = d3.scaleLinear()
+      .domain([0, Math.max(maxVal, 0) - Math.min(minVal, 0)])
+      .range([0, chartDim.w]);
 
     return (
       <svg
@@ -93,7 +107,13 @@ class BarChart extends Component {
         height={chartDim.h + chartDim.margin.bottom}
       >
         <DayTexts left={chartDim.margin.left} top={chartDim.margin.top} h={chartDim.barH} />
-        <Bars dim={chartDim} xScale={xScale} sel={selection} data={data} color={color} />
+        <Bars
+          dim={chartDim}
+          xScale={xScale}
+          barScale={barScale}
+          data={data.map(d => d[selection])}
+          color={color}
+        />
         <Axis scale={xScale} dim={chartDim}/>
       </svg>
     );

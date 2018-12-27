@@ -5,7 +5,7 @@ import Max from './Max';
 import Stats from './Stats';
 import {getCalendar} from './../processors/analysis';
 import {capitalize} from './../processors/formats';
-import {getColorBrewer} from './../processors/colors';
+import {getColorBrewer, getTwoColorsBrewer} from './../processors/colors';
 import {Icon} from 'react-fa';
 
 
@@ -22,10 +22,12 @@ class Visualization extends Component {
 
   render() {
     const {setting, data, dims} = this.props;
-    const {year, color, abbr, alt_abbr} = setting;
+    const {year, color, abbr, alt_abbr, hasNegative, isReverse} = setting;
     const {unit} = this.state;
-    const calendar = getCalendar(data, year);
-    const brewer = getColorBrewer(calendar.range[unit], color);
+    const calendar = getCalendar(data, year, hasNegative, isReverse);
+    const brewer = hasNegative ?
+      getTwoColorsBrewer(calendar.range[unit], isReverse) :
+      getColorBrewer(calendar.range[unit], color, hasNegative, isReverse);
 
     return (
       <div className="row unit-selection">

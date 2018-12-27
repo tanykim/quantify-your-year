@@ -1,9 +1,17 @@
 import * as d3 from 'd3-format';
 import moment from 'moment';
 
-//abc -> Abc
+//abc of abc -> Abc of Abc
 const capitalize = (str) => {
-  return str[0].charAt(0).toUpperCase() + str.slice(1);
+  // add as dataset grows
+  const preps = ['on', 'at', 'in', 'of', 'with'];
+  return str.split(' ').map(word => {
+    if (preps.indexOf(word) > -1) {
+      return word;
+    } else {
+      return word[0].charAt(0).toUpperCase() + word.slice(1);
+    }
+  }).join(' ');
 }
 
 //e.g., 1200 unit -> 1,200 units

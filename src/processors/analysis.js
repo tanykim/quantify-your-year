@@ -96,9 +96,16 @@ const getTotalCount = (year) => {
   };
 }
 
-const getValueRange = (min, max) => {
+const getValueRange = (min, max, hasNegative) => {
+
+  let newMax = max;
+  // if values include negative, find a bigger abs
+  if (hasNegative && min * -1 > max) {
+    newMax = min * -1;
+
+  }
   //get chroma range: brew colors upto 7 or 8
-  const minDiff = Math.floor((max - min) / 8).toString();
+  const minDiff = Math.floor((newMax - min) / 8).toString();
   //steps increase 1, 2, 5, 10, 20, 50, 100, 200, 5000, 1000 ...
   let step = 10;
   const firstDigit = parseInt(minDiff[0], 0);
@@ -120,9 +127,19 @@ const getValueRange = (min, max) => {
     }
     currentStep += distance;
   }
-  while (currentStep < max + distance);
+  while (currentStep < newMax + distance);
 
-  return {min, max, steps, distance};
+  //if negative numbers, add mirrored negative numbers up front
+  if (hasNegative) {
+    const stepCount = steps.length;
+    const dup = steps.slice(0);
+    for (let i = 1; i < stepCount; i++) {
+      dup.unshift(steps[i] * -1);
+    }
+    steps = dup;
+  }
+
+  return {min, max: newMax, steps, distance};
 }
 
 const getFence = (data) => {
@@ -147,7 +164,7 @@ const getFence = (data) => {
   }
 }
 
-const getCalendar = (data, year) => {
+const getCalendar = (data, year, hasNegative, isReverse) => {
   const byUnit = mapDataByUnit(data, year);
   const total = getTotalCount(year);
 
@@ -162,19 +179,25 @@ const getCalendar = (data, year) => {
     const unitData = byUnit[unit];
     const maxVal = Math.max(...byUnitArray[i]);
     const minVal = Math.min(...byUnitArray[i]);
+
+    // if negative number has in fact better meaning, get minimal data
+    const trueMaxVal = isReverse ? minVal : maxVal;
+
     let unitWithMax = [];
     for (let j in unitData) {
-      if (unitData[j] === maxVal) {
+      if (unitData[j] === trueMaxVal) {
         unitWithMax.push(humanizeUnitId(year, unit, j));
       }
     }
-    maxByUnit[unit] = {val: maxVal, list: unitWithMax};
+    maxByUnit[unit] = {val: trueMaxVal, list: unitWithMax};
 
     // get ranges that excludes outliers
     const outerFence = getFence(byUnitArray[i]);
+
     rangeByUnit[unit] = getValueRange(
       Math.max(minVal, outerFence[0]),
       Math.min(maxVal, outerFence[1]),
+      hasNegative,
     );
   }
 

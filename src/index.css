@@ -76,6 +76,32 @@
 .brown .text-highlight a {
   color: darkOrange !important;
 }
+.two-red .author,
+.two-red a {
+  color: #d73027;
+}
+.two-red i {
+  background-color: #d73027;
+}
+.two-red ii {
+  background-color: #fc8d59;
+}
+.two-red .text-highlight a {
+  color: #fc8d59 !important;
+}
+.two-blue .author,
+.two-blue a {
+  color: #4575b4;
+}
+.two-blue i {
+  background-color: #4575b4;
+}
+.two-blue ii {
+  background-color: #91bfdb;
+}
+.two-blue .text-highlight a {
+  color: #91bfdb !important;
+}
 body {
   margin: 0;
   padding: 0;

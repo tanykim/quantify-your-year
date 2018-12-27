@@ -1,0 +1,18 @@
+{
+  "year": 2018,
+  "author": "Dr. Lancaster",
+  "gender": "female",
+  "topic": "electricity",
+  "pastVerb": "used electricity",
+  "type": "usage",
+  "metric": "kWh",
+  "abbr": "kWh",
+  "dataSource": {
+    "name": "PG&E",
+    "url": "https://www.pge.com/"
+  },
+  "decimal": 2,
+  "hasNegative": true,
+  "isReverse": true,
+  "considerFrequency": false
+}

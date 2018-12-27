@@ -24,7 +24,9 @@ The setting file contains following information. For example,
   "alt_unit": "meter",
   "conversion": 1.09361,
   "alt_abbr": "m",
-  "decimal": 1
+  "decimal": 1,
+  "hasNegative": false,
+  "isReverse": false,
 }
 ```
 * Gender: gender of the person, choose from female, male, and other
@@ -37,6 +39,8 @@ The setting file contains following information. For example,
 * Alternative Unit (optional): Specify an alternative unit if it exists.
 * Alternative Abbribiation (optional)
 * Decimal (optional): If the data values contain decimal number, specify.
+* Has Negative: If the data contains negative values, specify as true.
+* Is Reverse: If the data contains negative values, and the negative ones have positive meanings (e.g., production/consumtion of energy of solar panels)
 
 If the frequency matters (e.g., one may not swim every day), this project provides further analysis including consecutive days/week/month.
 

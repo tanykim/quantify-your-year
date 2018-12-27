@@ -9,6 +9,9 @@ const colors = {
   brown: ['lightyellow', 'LightSalmon', 'darkOrange', 'Brown']
 };
 
+const getColorForTwoDirection = (isReverse) => {
+  return isReverse ? 'two-blue' : 'two-red';
+};
 
 const getRandomColor = () => {
   const themes = Object.keys(colors);
@@ -19,6 +22,18 @@ const getRandomColor = () => {
 const getColorBrewer = (setting, color) => {
   const {steps, distance} = setting;
   const brewer = chroma.bezier(colors[color]).scale().domain(steps);
+  return steps.map(step => brewer(step + distance / 2));
+}
+
+const getTwoColorsBrewer = (setting, isReverse) => {
+  // from red to blue
+  const {steps, distance, min, max} = setting;
+  let colorScale= ['#d73027','#f17d4e','#febf7d','#ffffbf','#b5d0de','#7ba2cc','#4575b4'];
+  if (isReverse) {
+    // if positive number means negative meaning, reverse.
+    colorScale.reverse();
+  }
+  const brewer = chroma.scale(colorScale).domain([min, max]);
   return steps.map(step => brewer(step + distance / 2));
 }
 
@@ -42,8 +57,31 @@ const getBlockColor = (brewer, steps, value) => {
   return color;
 }
 
+const twoColors = {
+  'two-red': '#d73027',
+  'two-blue': '#4575b4',
+};
+
 const getMaxColor = (c) => {
-  return colors[c][colors[c].length - 1];
+  // two directional charts, get the opposite color for the positive values
+  if (c.slice(0, 3) === 'two') {
+    return c === 'two-blue' ? twoColors['two-red'] : twoColors['two-blue'];
+  } else {
+    return colors[c][colors[c].length - 1];
+  }
 }
 
-export {colors, getRandomColor, getColorBrewer, getBlockColor, getMaxColor};
+const getColorForNegative = (c) => {
+  return twoColors[c];
+}
+
+export {
+  colors,
+  getColorForTwoDirection,
+  getRandomColor,
+  getColorBrewer,
+  getTwoColorsBrewer,
+  getBlockColor,
+  getMaxColor,
+  getColorForNegative,
+};

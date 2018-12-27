@@ -4,7 +4,7 @@ import Summary from './components/Summary';
 import Main from './components/Main';
 import ByDay from './components/ByDay';
 import {capitalize} from './processors/formats';
-import {getRandomColor} from './processors/colors';
+import {getColorForTwoDirection, getRandomColor} from './processors/colors';
 import {getVisDimensions} from './processors/dimensions';
 import {getConvertedData} from './processors/analysis';
 
@@ -40,15 +40,17 @@ class App extends Component {
     const dataId = this.props.params.dataId || 'tanyofish-swimming-2017';
     const setting = require(`./settings/${dataId}.json`);
     let data = require(`./data/${dataId}.json`);
-    let {author, topic, year, color, abbr, alt_unit, conversion, decimal} = setting;
+    let {author, topic, year, color, abbr, alt_unit, conversion, decimal, hasNegative} = setting;
     // if alternaitve unit exists
     if (alt_unit != null) {
       data = getConvertedData(data, conversion, decimal);
     }
-    if (color === undefined) {
+    if (hasNegative) {
+      color = getColorForTwoDirection(getRandomColor);
+    } else if (color === undefined) {
       color = getRandomColor();
-      setting.color = color;
     }
+    setting.color = color;
     if (abbr === undefined) {
       abbr = ' ' + setting.metric + 's';
       setting.abbr = abbr;

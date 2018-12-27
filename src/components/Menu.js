@@ -16,7 +16,7 @@ class Menu extends Component {
   render() {
     const list = Dataset.map((d, i) => {
       const elms = d.data.map((elm, j) => {
-        let url = `${elm.author}-${elm.topic.replace(/ /g, '-')}-${d.year}`;
+        let url = `${elm.author.split(' ').join('_')}-${elm.topic.replace(/ /g, '-')}-${d.year}`;
         url = url.toLowerCase();
         return (<li key={j} className={url === this.props.url ? 'text-highlight' : ''} onClick={this.hideMenu} >
           <Link to={url}>

@@ -8,6 +8,9 @@
 @purple: lightyellow, coral, mediumvioletred, purple;
 @brown: lightyellow, LightSalmon, darkOrange, Brown;
 
+@two-red: #ffffbf,  #fee090, #fc8d59, #d73027;
+@two-blue: #ffffbf, #e0f3f8, #91bfdb, #4575b4;
+
 .blue {
   .author, a { color: extract(@blue, 4); }
   i { background-color: extract(@blue, 4); }
@@ -43,4 +46,18 @@
   i { background-color: extract(@brown, 4); }
   ii { background-color: extract(@brown, 3); }
   .text-highlight a { color: extract(@brown, 3) !important; }
+}
+
+.two-red {
+  .author, a { color: extract(@two-red, 4); }
+  i { background-color: extract(@two-red, 4); }
+  ii { background-color: extract(@two-red, 3); }
+  .text-highlight a { color: extract(@two-red, 3) !important; }
+}
+
+.two-blue {
+  .author, a { color: extract(@two-blue, 4); }
+  i { background-color: extract(@two-blue, 4); }
+  ii { background-color: extract(@two-blue, 3); }
+  .text-highlight a { color: extract(@two-blue, 3) !important; }
 }
