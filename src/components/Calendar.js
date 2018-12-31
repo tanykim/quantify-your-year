@@ -18,7 +18,7 @@ class Calendar extends Component {
   }
 
   render() {
-    const {data, year, brewer, unit, dims, calendar, abbr, altAbbr} = this.props;
+    const {data, year, brewer, unit, dims, calendar, abbr, altAbbr, decimal} = this.props;
     const calInfo = getCalendarInfo(year);
     const {rectW, w, h, margin} = dims;
     return (
@@ -47,6 +47,7 @@ class Calendar extends Component {
             year={year}
             abbr={abbr}
             altAbbr={altAbbr}
+            decimal={decimal}
             margin={margin}
             rectW={rectW}
             w={w}

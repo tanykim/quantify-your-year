@@ -1,11 +1,15 @@
 import * as d3 from 'd3-format';
 import moment from 'moment';
 
+const spacize = (str) => {
+  return str.split('_').join(' ');
+}
+
 //abc of abc -> Abc of Abc
 const capitalize = (str) => {
   // add as dataset grows
   const preps = ['on', 'at', 'in', 'of', 'with'];
-  return str.split(' ').map(word => {
+  return str.split('_').join(' ').split(' ').map(word => {
     if (preps.indexOf(word) > -1) {
       return word;
     } else {
@@ -24,7 +28,7 @@ const pluralize = (n, unit, total) => {
 }
 
 const locale = (n, decimal) => {
-  const pow = decimal + 1 || 1;
+  const pow = decimal || 1;
   return (Math.round(n * Math.pow(10, pow)) / Math.pow(10, pow)).toLocaleString();
 }
 
@@ -109,4 +113,4 @@ const pronoun = (gender, isHead) => {
   return isHead ? capitalize(pn) : pn;
 }
 
-export { capitalize, pluralize, locale, prefix, humanizeUnitId, humanizeDuration, pronoun };
+export {spacize, capitalize, pluralize, locale, prefix, humanizeUnitId, humanizeDuration, pronoun};

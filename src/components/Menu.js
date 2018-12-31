@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Icon } from 'react-fa';
 import Dataset from './../settings/datasets.json';
+import {capitalize, spacize} from './../processors/formats';
 
 class Menu extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Menu extends Component {
         url = url.toLowerCase();
         return (<li key={j} className={url === this.props.url ? 'text-highlight' : ''} onClick={this.hideMenu} >
           <Link to={url}>
-            {elm.author}'s {elm.topic}
+            {capitalize(spacize(elm.author)) + '\'s ' + capitalize(elm.topic)}
           </Link>
         </li>)
       });

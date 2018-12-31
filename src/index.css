@@ -197,7 +197,6 @@ body {
   list-style: none;
 }
 .menu .menu-content .list li {
-  text-transform: capitalize;
   margin-bottom: 8px;
   letter-spacing: 0.02em;
 }

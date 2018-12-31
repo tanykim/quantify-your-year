@@ -14,7 +14,13 @@ build
 .env
 npm-debug.log
 
-# test files
-src/data/test-*.json
-src/settings/test-*.json
 package-lock.json
+
+src/data/*.json
+src/settings/*.json
+!src/settings/datasets.json
+!src/*/tanyofish-*.json
+!src/*/tanykim*.json
+!src/*/dr.*.json
+!src/*/mr.*.json
+

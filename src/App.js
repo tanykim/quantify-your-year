@@ -115,4 +115,31 @@ class App extends Component {
   }
 }
 
+/* setting temp
+      // {
+      //   "author": "tanyofish",
+      //   "topic": "twitter"
+      // },
+      // {
+      //   "author": "tanykim",
+      //   "topic": "time at dr._lancaster"
+      // },
+      // {
+      //   "author": "tanyoung",
+      //   "topic": "steps"
+      // },
+      // {
+      //   "author": "tanyoung",
+      //   "topic": "flights climbed"
+      // },
+      // {
+      //   "author": "dr. lancaster",
+      //   "topic": "electricity usage"
+      // },
+      // {
+      //   "author": "mr. moon",
+      //   "topic": "driving"
+      // }
+
+*/
 export default App;

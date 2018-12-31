@@ -1,0 +1,15 @@
+{
+  "year":2018,
+  "author":"tanykim",
+  "topic":"time at dr._lancaster",
+  "gender":"female",
+  "pastVerb":"stayed at home",
+  "type":"duration",
+  "metric":"hour",
+  "dataSource":{
+    "name":"Google Maps",
+    "url":"https://www.google.com/maps/timeline"
+  },
+  "considerFrequency":false,
+  "decimal":1
+}

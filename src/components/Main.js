@@ -22,7 +22,7 @@ class Visualization extends Component {
 
   render() {
     const {setting, data, dims} = this.props;
-    const {year, color, abbr, alt_abbr, hasNegative, isReverse} = setting;
+    const {year, color, abbr, alt_abbr, hasNegative, isReverse, decimal} = setting;
     const {unit} = this.state;
     const calendar = getCalendar(data, year, hasNegative, isReverse);
     const brewer = hasNegative ?
@@ -65,6 +65,7 @@ class Visualization extends Component {
           dims={dims}
           abbr={abbr}
           altAbbr={alt_abbr}
+          decimal={decimal}
           calendar={calendar} />
         <Max
           {...setting}

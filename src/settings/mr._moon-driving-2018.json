@@ -1,0 +1,15 @@
+{
+  "year":2018,
+  "author":"mr._moon",
+  "topic":"driving",
+  "gender":"male",
+  "pastVerb":"drove",
+  "type":"distance",
+  "metric":"mile",
+  "dataSource":{
+    "name":"Metromile",
+    "url":"https://www.metromile.com/"
+  },
+  "decimal":2,
+  "considerFrequency":true
+}
