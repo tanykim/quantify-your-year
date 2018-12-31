@@ -8,10 +8,15 @@ class Max extends Component {
     const maxActiveList = max.list.map((item, i) => {
       let display = item;
       const count = max.list.length;
-      if (i > 0 && i < count - 1) {
+      // when there are only two items, space after the first.
+      if (i === 0 && count == 2) {
+        display += ' ';
+      // Oxford comma
+      } else if (i >= 0 && i < count - 1) {
         display += ', ';
       }
-      if (i > 1 && i === count - 2) {
+      // before the last item
+      if (i >= 0 && i === count - 2) {
         display += 'and ';
       }
       let tail = '.';

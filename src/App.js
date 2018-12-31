@@ -37,7 +37,7 @@ class App extends Component {
 
   render() {
     // get data id from url
-    const dataId = this.props.params.dataId || 'tanyofish-swimming-2017';
+    const dataId = this.props.params.dataId || 'tanyofish-swimming-2018';
     const setting = require(`./settings/${dataId}.json`);
     let data = require(`./data/${dataId}.json`);
     let {author, topic, year, color, abbr, alt_unit, conversion, decimal, hasNegative} = setting;
