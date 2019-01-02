@@ -1,8 +1,8 @@
 {
   "year":2018,
   "author":"dr._lancaster",
+  "topic":"electricity usage",
   "gender":"female",
-  "topic":"electricity-usage",
   "pastVerb":"used electricity",
   "type":"usage",
   "metric":"kWh",

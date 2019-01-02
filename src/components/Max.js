@@ -9,7 +9,7 @@ class Max extends Component {
       let display = item;
       const count = max.list.length;
       // when there are only two items, space after the first.
-      if (i === 0 && count == 2) {
+      if (i === 0 && count === 2) {
         display += ' ';
       // Oxford comma
       } else if (i >= 0 && i < count - 1) {
