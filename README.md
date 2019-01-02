@@ -64,9 +64,7 @@ Save this file as ```[AUTHOR]-[ACTIVITY_TOPIC]-[YEAR].json``` under ```src/data`
 
 If you log your data on Google Spreadsheet, try this convenient [converter](https://www.npmjs.com/package/google-spreadsheet-to-json).
 
-If you want to trace your time spent at a single location exploiting Google's location history data, check out [this repo](https://github.com/tanykim/google-map-tracer).
-
-If you want to count your tweets per day, check out [this repo](https://github.com/tanykim/tweet-counter).
+I wrote some Python scripts to generate both dataset and setting JSON files with downloadable data from Twitter, Google Takeout, PG&E, iOS Health App, and Metromile. Check out [this repo](https://github.com/tanykim/quantify-your-year-data-generator).
 
 ## Development
 ```
