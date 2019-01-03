@@ -64,7 +64,7 @@ Save this file as ```[AUTHOR]-[ACTIVITY_TOPIC]-[YEAR].json``` under ```src/data`
 
 If you log your data on Google Spreadsheet, try this convenient [converter](https://www.npmjs.com/package/google-spreadsheet-to-json).
 
-I wrote some Python scripts to generate both dataset and setting JSON files with downloadable data from Twitter, Google Takeout, PG&E, iOS Health App, and Metromile. Check out [this repo](https://github.com/tanykim/quantify-your-year-data-generator).
+I wrote some Python scripts to generate both dataset and setting JSON files with downloadable data from Facebook, Twitter, Google Takeout, PG&E, iOS Health App, and Metromile. Check out [this repo](https://github.com/tanykim/quantify-your-year-data-generator).
 
 ## Development
 ```

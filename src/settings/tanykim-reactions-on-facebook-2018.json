@@ -1,0 +1,14 @@
+{
+  "year":2018,
+  "author":"tanykim",
+  "topic":"reactions on facebook",
+  "gender":"female",
+  "pastVerb":"reacted on Facebook",
+  "type":"count",
+  "metric":"reaction",
+  "dataSource":{
+    "name":"Facebook",
+    "url":"https://www.facebook.com/"
+  },
+  "considerFrequency":false
+}
