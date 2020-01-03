@@ -3,7 +3,7 @@ import { locale, humanizeUnitId, humanizeDuration } from './formats';
 
 const getConvertedData = (data, conversion, decimal) => {
   let newData = [];
-  for (let d of data) {
+  for (const d of data) {
     let {date, value, alt_unit} = d;
     const newVal = {date, value};
     if (alt_unit != null) {
@@ -63,7 +63,7 @@ const mapDataByUnit = (data, year) => {
     month: {}
   };
 
-  for (let i in data) {
+  for (const i in data) {
     const d = data[i];
     //week
     let w = getWeek(d.date) - 1;
@@ -84,7 +84,6 @@ const mapDataByUnit = (data, year) => {
       byUnit.month[m] += d.value;
     }
   }
-
   return byUnit;
 }
 
@@ -97,7 +96,6 @@ const getTotalCount = (year) => {
 }
 
 const getValueRange = (min, max, hasNegative) => {
-
   let newMax = max;
   // if values include negative, find a bigger abs
   if (hasNegative && min * -1 > max) {
@@ -157,7 +155,7 @@ const getFence = (data) => {
   ];
   const outOfInnerFence = data.filter(d => d < outerFence[0] || d > innerFence[1]);
   // do not make too many outliers
-  if (outOfInnerFence.length < Math.sqrt(data.length / 20)) {
+  if (outOfInnerFence.length < Math.sqrt(data.length / 5)) {
     return innerFence;
   } else {
     return outerFence;
@@ -174,7 +172,7 @@ const getCalendar = (data, year, hasNegative, isReverse) => {
   // get max vals and range by unit
   const maxByUnit = {};
   const rangeByUnit = {};
-  for (let i in units) {
+  for (const i in units) {
     const unit = units[i];
     const unitData = byUnit[unit];
     const maxVal = Math.max(...byUnitArray[i]);
@@ -184,7 +182,7 @@ const getCalendar = (data, year, hasNegative, isReverse) => {
     const trueMaxVal = isReverse ? minVal : maxVal;
 
     let unitWithMax = [];
-    for (let j in unitData) {
+    for (const j in unitData) {
       if (unitData[j] === trueMaxVal) {
         unitWithMax.push(humanizeUnitId(year, unit, j));
       }
@@ -217,12 +215,11 @@ const getStatsByUnit = (data, year) => {
   //get the list conscutive day/week/month first
   const consecutive = arrToObj(units.map(unit => [unit, {active: [], inactive: []}]));
 
-  for (let unit of units) {
+  for (const unit of units) {
     let prevStatus = byUnit[unit][0] != null ? 'active' : 'inactive';
     consecutive[unit][prevStatus][0] = {count: 1, start: 0};
     consecutive[unit][prevStatus === 'active' ? 'inactive' : 'active'][0] = {count: 0, start: null};
-    for (let i = 0; i < total[unit] - 1; i++) {
-      // console.log(i)
+    for (let i = 0; i < total[unit]; i++) {
       if (i > 0) {
         let status = byUnit[unit][i] != null ? 'active' : 'inactive';
         //check with the previous value; same value -> incrase count, diff -> add new array

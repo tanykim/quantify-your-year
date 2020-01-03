@@ -21,6 +21,7 @@ src/settings/*.json
 !src/settings/datasets.json
 !src/*/tanyofish-*.json
 !src/*/tanykim*.json
+!src/*/tanyoung*.json
 !src/*/dr.*.json
 !src/*/mr.*.json
 

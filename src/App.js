@@ -37,7 +37,7 @@ class App extends Component {
 
   render() {
     // get data id from url
-    const dataId = this.props.params.dataId || 'tanyofish-swimming-2018';
+    const dataId = this.props.params.dataId || 'tanyofish-swimming-2019';
     const setting = require(`./settings/${dataId}.json`);
     let data = require(`./data/${dataId}.json`);
     let {author, topic, year, color, abbr, alt_unit, conversion, decimal, hasNegative} = setting;
@@ -102,7 +102,7 @@ class App extends Component {
             </span>
             {setting.dataSource &&
               <span className="link">Powered by
-                <a href={setting.dataSource.url} target="_blank">
+                <a href={setting.dataSource.url} target="_blank" rel="noopener noreferrer">
                   {setting.dataSource.name}
                 </a>
               </span>

@@ -1,5 +1,38 @@
 [
   {
+    "year": 2019,
+    "data": [
+      {
+        "author": "tanyofish",
+        "topic": "swimming"
+      },
+      {
+        "author": "tanyoung",
+        "topic": "steps"
+      },
+      {
+        "author": "tanyoung",
+        "topic": "flights climbed"
+      },
+      {
+        "author": "tanyofish",
+        "topic": "twitter"
+      },
+      {
+        "author": "dr. lancaster",
+        "topic": "electricity usage"
+      },
+      {
+        "author": "tanyoung",
+        "topic": "piano_practice"
+      },
+      {
+        "author": "tanykim",
+        "topic": "time at dr._lancaster"
+      }
+    ]
+  },
+  {
     "year": 2018,
     "data": [
       {
@@ -35,7 +68,8 @@
         "topic": "driving"
       }
     ]
-  },  {
+  },
+  {
     "year": 2017,
     "data": [
       {

@@ -6,10 +6,10 @@
   background-color: #031968;
 }
 .blue ii {
-  background-color: #87CEEB;
+  background-color: #87ceeb;
 }
 .blue .text-highlight a {
-  color: #87CEEB !important;
+  color: #87ceeb !important;
 }
 .red .author,
 .red a {
@@ -144,7 +144,7 @@ body {
 }
 .header-fixed .author,
 .header-fixed .topic {
-  color: #FFF !important;
+  color: #fff !important;
   font-size: 16px;
   display: inline-block;
 }
@@ -162,12 +162,10 @@ body {
 }
 .menu .menu-text {
   margin-bottom: 8px;
+  cursor: pointer;
 }
 .menu .menu-close {
   letter-spacing: 0.05em;
-}
-.menu .menu-icon {
-  cursor: pointer;
 }
 .menu .menu-content {
   display: none;
@@ -293,7 +291,7 @@ i {
   font-style: normal;
   font-weight: normal;
   padding: 0 8px;
-  color: #FFF;
+  color: #fff;
   display: inline-block;
   margin-top: 4px;
   margin-bottom: 4px;
@@ -407,5 +405,5 @@ text {
 .tp {
   font-weight: normal;
   font-size: 14px;
-  fill: #FFF;
+  fill: #fff;
 }
