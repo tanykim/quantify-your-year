@@ -1,0 +1,14 @@
+{
+  "year":2018,
+  "author":"tanyoung",
+  "topic":"steps",
+  "gender":"female",
+  "pastVerb":"walked",
+  "type":"count",
+  "metric":"step",
+  "dataSource":{
+    "name":"Apple iOS Health",
+    "url":"https://www.apple.com/ios/health/"
+  },
+  "considerFrequency":false
+}

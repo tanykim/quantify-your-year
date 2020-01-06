@@ -1,0 +1,10 @@
+{
+  "year":2019,
+  "author":"tanyoung",
+  "topic":"piano_practice",
+  "gender":"female",
+  "pastVerb":"played the piano",
+  "type":"duration",
+  "metric":"minute",
+  "considerFrequency":true
+}
