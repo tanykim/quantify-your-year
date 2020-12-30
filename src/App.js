@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Menu from './components/Menu';
 import Summary from './components/Summary';
 import Main from './components/Main';
 import ByDay from './components/ByDay';
-import {capitalize} from './processors/formats';
-import {getColorForTwoDirection, getRandomColor} from './processors/colors';
-import {getVisDimensions} from './processors/dimensions';
-import {getConvertedData} from './processors/analysis';
+import { capitalize } from './processors/formats';
+import { getColorForTwoDirection, getRandomColor } from './processors/colors';
+import { getVisDimensions } from './processors/dimensions';
+import { getConvertedData } from './processors/analysis';
 
-import {Icon} from 'react-fa';
+import { Icon } from 'react-fa';
 
 class App extends Component {
   constructor(props) {
@@ -28,19 +28,19 @@ class App extends Component {
 
   handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    this.setState({isScrolled: scrollTop > 180});
+    this.setState({ isScrolled: scrollTop > 180 });
   }
 
   toggleMenu(willClose) {
-    this.setState({menuOpen: !willClose || !this.state.menuOpen});
+    this.setState({ menuOpen: !willClose || !this.state.menuOpen });
   }
 
   render() {
     // get data id from url
-    const dataId = this.props.params.dataId || 'tanyofish-swimming-2019';
+    const dataId = this.props.params.dataId || 'tanyofish-swimming-2020';
     const setting = require(`./settings/${dataId}.json`);
     let data = require(`./data/${dataId}.json`);
-    let {author, topic, year, color, abbr, alt_unit, conversion, decimal, hasNegative} = setting;
+    let { author, topic, year, color, abbr, alt_unit, conversion, decimal, hasNegative } = setting;
     // if alternaitve unit exists
     if (alt_unit != null) {
       data = getConvertedData(data, conversion, decimal);
@@ -59,17 +59,17 @@ class App extends Component {
     return (
       <div className={color}>
         <div className="menu">
-          <Icon name="bars" size="2x" onClick={this.toggleMenu} className="hidden-md hidden-lg menu-icon"/>
+          <Icon name="bars" size="2x" onClick={this.toggleMenu} className="hidden-md hidden-lg menu-icon" />
           <div onClick={this.toggleMenu} className="visible-md-block visible-lg-block menu-text">
-            Datasets <Icon name={`chevron-${this.state.menuOpen? 'up' : 'down'}`} onClick={this.toggleMenu} className="menu-icon"/>
+            Datasets <Icon name={`chevron-${this.state.menuOpen ? 'up' : 'down'}`} onClick={this.toggleMenu} className="menu-icon" />
           </div>
           <div className={this.state.menuOpen ? 'menu-content show' : 'menu-content hide'}>
-            <Menu close={this.toggleMenu} url={dataId}/>
+            <Menu close={this.toggleMenu} url={dataId} />
           </div>
         </div>
         <div className={this.state.isScrolled ? 'header-fixed' : 'header'}>
-            <div className="author">{capitalize(author)}'s</div>
-            <div className="topic">{capitalize(topic)} in {year}</div>
+          <div className="author">{capitalize(author)}'s</div>
+          <div className="topic">{capitalize(topic)} in {year}</div>
         </div>
         <Summary
           {...setting}
