@@ -20,20 +20,22 @@ const getRandomColor = () => {
 }
 
 const getColorBrewer = (setting, color) => {
-  const {steps, distance} = setting;
+  const { steps, distance } = setting;
   const brewer = chroma.bezier(colors[color]).scale().domain(steps);
   return steps.map(step => brewer(step + distance / 2));
 }
 
 const getTwoColorsBrewer = (setting, isReverse) => {
   // from red to blue
-  const {steps, distance, min, max} = setting;
-  let colorScale= ['#d73027','#f17d4e','#febf7d','#ffffbf','#b5d0de','#7ba2cc','#4575b4'];
+  const { steps, distance, min, max } = setting;
+  let colorScale = ['#d73027', '#f17d4e', '#febf7d', '#ffffbf', '#b5d0de', '#7ba2cc', '#2954b8'];
   if (isReverse) {
     // if positive number means negative meaning, reverse.
     colorScale.reverse();
   }
-  const brewer = chroma.scale(colorScale).domain([min, max]);
+  const minNormalized = Math.abs(min) < Math.abs(max) ? -1 * max : min;
+  const maxNormalized = Math.abs(min) > Math.abs(max) ? -1 * min : max;
+  const brewer = chroma.scale(colorScale).domain([minNormalized, maxNormalized]);
   return steps.map(step => brewer(step + distance / 2));
 }
 

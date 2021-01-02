@@ -1,0 +1,14 @@
+{
+  "year":2020,
+  "author":"tanyoung",
+  "topic":"flights climbed",
+  "gender":"female",
+  "pastVerb":"climbed",
+  "type":"count",
+  "metric":"floor",
+  "dataSource":{
+    "name":"Apple iOS Health",
+    "url":"https://www.apple.com/ios/health/"
+  },
+  "considerFrequency":false
+}
