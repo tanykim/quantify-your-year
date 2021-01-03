@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
-import {capitalize, pluralize} from './../processors/formats';
+import React, { Component } from 'react';
+import { capitalize, pluralize } from './../processors/formats';
+import { getColorForTwoDirection } from './../processors/colors';
 
 class Max extends Component {
   render() {
-    const {unit, calendar, author, type, metric} = this.props;
+    let { unit, calendar, author, type, color, metric, hasNegative, isReverse } = this.props;
     const max = calendar.max[unit];
     const maxActiveList = max.list.map((item, i) => {
       let display = item;
@@ -11,7 +12,7 @@ class Max extends Component {
       // when there are only two items, space after the first.
       if (i === 0 && count === 2) {
         display += ' ';
-      // Oxford comma
+        // Oxford comma
       } else if (i >= 0 && i < count - 1) {
         display += ', ';
       }
@@ -25,14 +26,16 @@ class Max extends Component {
       }
       return (<span key={i}>{display}{i === count - 1 ? tail : ''}</span>);
     });
-    const conj = {day: 'on', week: 'during', month: 'in'};
-
+    const conj = { day: 'on', week: 'during', month: 'in' };
+    if (hasNegative) {
+      color = getColorForTwoDirection(max.val < 0 && isReverse || !isReverse && max.val >= 0);
+    }
     return (
-      <div className="col-xs-12 max">
-        {capitalize(author)}'s record {type} in a {unit} is
-        {` `}<i>{pluralize(max.val, metric)}</i>:
-        {` `}achieved {conj[unit]} <i>{maxActiveList}</i>
-      </div>
+      <div className={`col-xs-12 max ${color}`} >
+      { capitalize(author) }'s record {type} in a {unit} is
+    { ` ` } <i>{pluralize(max.val, metric)}</i>:
+    { ` ` } achieved { conj[unit] } <i>{maxActiveList}</i>
+      </div >
     );
   }
 }

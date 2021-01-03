@@ -40,14 +40,14 @@ class App extends Component {
     const dataId = this.props.params.dataId || 'tanyofish-swimming-2020';
     const setting = require(`./settings/${dataId}.json`);
     let data = require(`./data/${dataId}.json`);
-    let { author, topic, year, color, abbr, alt_unit, conversion, decimal, hasNegative } = setting;
+    let { author, topic, year, color, abbr, alt_unit, conversion, decimal, hasNegative, isReverse } = setting;
     // if alternaitve unit exists
     if (alt_unit != null) {
       data = getConvertedData(data, conversion, decimal);
     }
     if (hasNegative) {
-      color = getColorForTwoDirection(getRandomColor);
-    } else if (color === undefined) {
+      color = getColorForTwoDirection(isReverse);
+    } else if (color === undefined && !hasNegative) {
       color = getRandomColor();
     }
     setting.color = color;
@@ -57,7 +57,7 @@ class App extends Component {
     }
     const dims = getVisDimensions(year);
     return (
-      <div className={color}>
+      <div>
         <div className="menu">
           <Icon name="bars" size="2x" onClick={this.toggleMenu} className="hidden-md hidden-lg menu-icon" />
           <div onClick={this.toggleMenu} className="visible-md-block visible-lg-block menu-text">
@@ -67,7 +67,7 @@ class App extends Component {
             <Menu close={this.toggleMenu} url={dataId} />
           </div>
         </div>
-        <div className={this.state.isScrolled ? 'header-fixed' : 'header'}>
+        <div className={`${this.state.isScrolled ? 'header-fixed' : 'header'} ${color}`}>
           <div className="author">{capitalize(author)}'s</div>
           <div className="topic">{capitalize(topic)} in {year}</div>
         </div>
@@ -86,7 +86,7 @@ class App extends Component {
           data={data}
         />
         <div className="row">
-          <div className="col-xs-12 footer">
+          <div className={`col-xs-12 footer ${color}`}>
             <span className="link">Share
               <a rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=Visualization of personal activity data of a calendar year by @tanykim at http%3A%2F%2Ftany.kim/quantify-your-year %23dataviz %23d3 %23quantifyself" target="_blank">
                 <Icon name="twitter" />
@@ -109,7 +109,6 @@ class App extends Component {
             }
           </div>
         </div>
-
       </div>
     );
   }
