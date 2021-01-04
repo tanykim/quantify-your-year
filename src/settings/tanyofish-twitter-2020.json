@@ -1,0 +1,14 @@
+{
+  "year":2020,
+  "author":"tanyofish",
+  "topic":"twitter",
+  "gender":"female",
+  "pastVerb":"tweeted",
+  "type":"count",
+  "metric":"tweet",
+  "dataSource":{
+    "name":"Twitter",
+    "url":"http://www.twitter.com/"
+  },
+  "considerFrequency":false
+}
